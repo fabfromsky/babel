@@ -1,0 +1,7 @@
+target/
+src/main/resources/sql
+.classpath
+.DS_Store
+.settings/
+.project
+
