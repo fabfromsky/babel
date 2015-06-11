@@ -7,24 +7,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
 @Table(name="Babel_user")
+@JsonInclude(Include.NON_NULL)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonIgnore
 	protected  int userId;
-		
+	
+	public User() {}
+
 	public User(int userId, String firstName, String lastName, String mail,
-			String username, String password, List<Game> games,
-			List<Trophy> trophies) {
+			String username, String password, List<Trophy> trophies,
+			List<Game> playedGames, List<Game> answeredGames) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -33,7 +40,11 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.trophies = trophies;
+		this.playedGames = playedGames;
+		this.answeredGames = answeredGames;
 	}
+
+
 
 	protected String firstName;
 	
@@ -47,8 +58,18 @@ public class User {
 	
 	@JsonProperty("trophies")
 	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "userTrophy")
+	@ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
+	
+	@JsonProperty("playedGames")
+	@JsonManagedReference
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "firstPlayer")
+	protected List<Game> playedGames;
+	
+	@JsonProperty("answeredGames")
+	@JsonManagedReference
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "secondPlayer")
+	protected List<Game> answeredGames;
 
 	public int getUserId() {
 		return userId;
@@ -104,6 +125,22 @@ public class User {
 
 	public void setTrophies(List<Trophy> trophies) {
 		this.trophies = trophies;
+	}
+
+	public List<Game> getPlayedGames() {
+		return playedGames;
+	}
+
+	public void setPlayedGames(List<Game> playedGames) {
+		this.playedGames = playedGames;
+	}
+
+	public List<Game> getAnsweredGames() {
+		return answeredGames;
+	}
+
+	public void setAnsweredGames(List<Game> answeredGames) {
+		this.answeredGames = answeredGames;
 	}
 	
 	
