@@ -3,15 +3,14 @@ package babel.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -24,14 +23,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonIgnore
 	protected  int userId;
 	
 	public User() {}
 
 	public User(int userId, String firstName, String lastName, String mail,
-			String username, String password, List<Trophy> trophies,
-			List<Game> playedGames, List<Game> answeredGames) {
+			String username, String password, List<Trophy> trophies) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -40,37 +37,29 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.trophies = trophies;
-		this.playedGames = playedGames;
-		this.answeredGames = answeredGames;
 	}
 
-
-
+	@Column(nullable = false)
 	protected String firstName;
 	
+	@Column(nullable = false)
 	protected String lastName;
 	
+	@Column(nullable = false)
 	protected String mail;
 	
+	@Column(nullable = false)
 	protected String username;
 	
+	@Column(nullable = false)
 	protected String password;
 	
+	@Column(nullable = true)
 	@JsonProperty("trophies")
 	@JsonManagedReference
 	@ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
 	
-	@JsonProperty("playedGames")
-	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "firstPlayer")
-	protected List<Game> playedGames;
-	
-	@JsonProperty("answeredGames")
-	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "secondPlayer")
-	protected List<Game> answeredGames;
-
 	public int getUserId() {
 		return userId;
 	}
@@ -124,25 +113,6 @@ public class User {
 	}
 
 	public void setTrophies(List<Trophy> trophies) {
-		this.trophies = trophies;
+		this.trophies = trophies;	
 	}
-
-	public List<Game> getPlayedGames() {
-		return playedGames;
-	}
-
-	public void setPlayedGames(List<Game> playedGames) {
-		this.playedGames = playedGames;
-	}
-
-	public List<Game> getAnsweredGames() {
-		return answeredGames;
-	}
-
-	public void setAnsweredGames(List<Game> answeredGames) {
-		this.answeredGames = answeredGames;
-	}
-	
-	
-	
 }

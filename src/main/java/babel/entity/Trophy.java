@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -23,31 +22,26 @@ public class Trophy {
 	public Trophy(){};
 
 	public Trophy(int trophyId, List<User> userTrophy, String trophyName,
-			int points, boolean unlocked) {
+			int points) {
 		super();
 		this.trophyId = trophyId;
 		this.userTrophy = userTrophy;
 		this.trophyName = trophyName;
 		this.points = points;
-		this.unlocked = unlocked;
 	}
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@JsonIgnore
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int trophyId;
 	
 	@JsonBackReference
 	@ManyToMany()
-	@JoinColumn(name="userId")
+	@JoinColumn(name="username")
 	protected List<User> userTrophy;
 
 	protected String trophyName;
 	
 	protected int points;
-	
-	protected boolean unlocked;
 
 	public int getTrophyId() {
 		return trophyId;
@@ -79,15 +73,6 @@ public class Trophy {
 
 	public void setPoints(int points) {
 		this.points = points;
-	}
-
-	public boolean isUnlocked() {
-		return unlocked;
-	}
-
-	public void setUnlocked(boolean unlocked) {
-		this.unlocked = unlocked;
-	}
-	
+	}	
 	
 }

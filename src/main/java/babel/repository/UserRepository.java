@@ -7,7 +7,5 @@ import babel.entity.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	
 	public User findByUsername(String username);
-
-	public User findByUserId(int userId);
-
+	
 }
