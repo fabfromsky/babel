@@ -18,12 +18,12 @@ INSERT INTO babel_trophy  (points, trophy_name) VALUES (500, "victoire écrasant
 INSERT INTO babel_trophy  (points, trophy_name) VALUES (200, "joueur solo");
 
 INSERT INTO babel_trophy_user_trophy VALUES (1, 2);
-INSERT INTO babel_trophy_user_trophy VALUES (1, 3);
-INSERT INTO babel_trophy_user_trophy VALUES (1, 4);
+INSERT INTO babel_trophy_user_trophy VALUES (3, 2);
+INSERT INTO babel_trophy_user_trophy VALUES (1, 1);
 INSERT INTO babel_trophy_user_trophy VALUES (2, 1);
-INSERT INTO babel_trophy_user_trophy VALUES (2, 3);
-INSERT INTO babel_trophy_user_trophy VALUES (2, 6);
+INSERT INTO babel_trophy_user_trophy VALUES (5, 2);
+INSERT INTO babel_trophy_user_trophy VALUES (6, 1);
 
-INSERT INTO babel_challenge VALUES (1, "claratatouille", 321, 1, "mondentier", 320);
-INSERT INTO babel_challenge VALUES (2, "claratatouille", 321, 2, "mondentier", 320);
-INSERT INTO babel_challenge VALUES (3, "mondentier", 321, 3, "claratatouille", 320);
+INSERT INTO babel_challenge VALUES (1, "claratatouille", "11/06/2015", 321, 1, "mondentier", 320);
+INSERT INTO babel_challenge VALUES (2, "claratatouille", 321, "11/06/2015", 2, "mondentier", 320);
+INSERT INTO babel_challenge VALUES (3, "mondentier", 321, "10/06/2015", 3, "claratatouille", 320);

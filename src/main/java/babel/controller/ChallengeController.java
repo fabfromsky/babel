@@ -18,8 +18,8 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeRepository challengeRepo;
 	
-	@RequestMapping(method = RequestMethod.GET, params = {"player"})
-	public List<Challenge> getChallengesByPlayer(@RequestParam(value ="player", required = true) String player){
+	@RequestMapping(method = RequestMethod.GET, params = {"username"})
+	public List<Challenge> getChallengesByPlayer(@RequestParam(value ="username", required = true) String player){
 		return challengeRepo.findByPlayer(player);
 	}
 
