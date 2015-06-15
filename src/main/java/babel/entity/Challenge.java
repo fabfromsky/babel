@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,7 @@ public class Challenge {
 	
 	public Challenge(){};
 	
-	public Challenge(int challengeId, String game, String player,
+	public Challenge(int challengeId, Game game, String player,
 			String challenger, int playerScore, int challengerScore, String date) {
 		super();
 		this.challengeId = challengeId;
@@ -29,7 +31,9 @@ public class Challenge {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int challengeId;
 	
-	protected String game;
+	@ManyToOne
+	@JoinColumn(name = "gameId")
+	protected Game game;
 	
 	protected String player;
 	
@@ -50,11 +54,11 @@ public class Challenge {
 		this.challengeId = challengeId;
 	}
 
-	public String getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(String game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 

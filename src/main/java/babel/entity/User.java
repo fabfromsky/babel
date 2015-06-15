@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -21,11 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name="Babel_user")
 @JsonInclude(Include.NON_NULL)
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonIgnore
 	protected  int userId;
 	
-	public User() {}
+	public User() {};
+
 
 	public User(int userId, String firstName, String lastName, String mail,
 			String username, String password, List<Trophy> trophies) {
@@ -37,7 +41,8 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.trophies = trophies;
-	}
+	};
+
 
 	@Column(nullable = false)
 	protected String firstName;
@@ -48,7 +53,7 @@ public class User {
 	@Column(nullable = false)
 	protected String mail;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	protected String username;
 	
 	@Column(nullable = false)
@@ -57,9 +62,9 @@ public class User {
 	@Column(nullable = true)
 	@JsonProperty("trophies")
 	@JsonManagedReference
-	@ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "userTrophy")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
-	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -68,51 +73,68 @@ public class User {
 		this.userId = userId;
 	}
 
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+
 	public String getLastName() {
 		return lastName;
 	}
+
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+
 	public String getMail() {
 		return mail;
 	}
+
 
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
 
+
 	public String getUsername() {
 		return username;
 	}
+
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+
 	public String getPassword() {
 		return password;
 	}
+
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
 	public List<Trophy> getTrophies() {
 		return trophies;
 	}
 
+
 	public void setTrophies(List<Trophy> trophies) {
-		this.trophies = trophies;	
+		this.trophies = trophies;
 	}
+	
+	public void addTrophy(Trophy trophy) {
+		this.trophies.add(trophy);
+	}
+	
 }

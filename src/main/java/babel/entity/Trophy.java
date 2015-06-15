@@ -3,8 +3,6 @@ package babel.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -21,18 +19,18 @@ public class Trophy {
 
 	public Trophy(){};
 
-	public Trophy(int trophyId, List<User> userTrophy, String trophyName,
-			int points) {
+	public Trophy(String trophyId, List<User> userTrophy, String trophyName,
+			int points, String description) {
 		super();
 		this.trophyId = trophyId;
 		this.userTrophy = userTrophy;
 		this.trophyName = trophyName;
 		this.points = points;
+		this.description = description;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected int trophyId;
+	protected String trophyId;
 	
 	@JsonBackReference
 	@ManyToMany()
@@ -42,12 +40,14 @@ public class Trophy {
 	protected String trophyName;
 	
 	protected int points;
+	
+	protected String description;
 
-	public int getTrophyId() {
+	public String getTrophyId() {
 		return trophyId;
 	}
 
-	public void setTrophyId(int trophyId) {
+	public void setTrophyId(String trophyId) {
 		this.trophyId = trophyId;
 	}
 
@@ -73,6 +73,14 @@ public class Trophy {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}	
-	
+		
 }

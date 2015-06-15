@@ -1,8 +1,6 @@
 package babel.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,23 +15,25 @@ public class Game {
 	
 	public Game() {};
 	
-	public Game(int gameId, String gameName) {
+	public Game(String gameId, String gameName, String gameDescription) {
 		super();
 		this.gameId = gameId;
 		this.gameName = gameName;
+		this.gameDescription = gameDescription;
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	protected int gameId;
+	protected String gameId;
 	
 	protected String gameName;
+	
+	protected String gameDescription;
 
-	public int getGameId() {
+	public String getGameId() {
 		return gameId;
 	}
 
-	public void setGameId(int gameId) {
+	public void setGameId(String gameId) {
 		this.gameId = gameId;
 	}
 
@@ -44,7 +44,12 @@ public class Game {
 	public void setGameName(String gameName) {
 		this.gameName = gameName;
 	}
-	
-	
-	
+
+	public String getGameDescription() {
+		return gameDescription;
+	}
+
+	public void setGameDescription(String gameDescription) {
+		this.gameDescription = gameDescription;
+	}
 }
