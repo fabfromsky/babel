@@ -1,9 +1,11 @@
-INSERT INTO babel_user VALUES(1, "Clara", "Tatouille", "claratatouille@gmail.com", "ljgjhg", "claratatouille");
-INSERT INTO babel_user VALUES(2, "Edmond", "Dentier", "mondentier@mail.com", "ejffh", "mondentier");
+INSERT INTO babel_user VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345");
+INSERT INTO babel_user VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456" );
+INSERT INTO babel_user VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567");
+INSERT INTO babel_user VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789");
 
-INSERT INTO babel_game VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu");
-INSERT INTO babel_game VALUES ("jumpinhseep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!");
-INSERT INTO babel_game VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake");
+INSERT INTO babel_game VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html");
+INSERT INTO babel_game VALUES ("jumpinhseep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinhseep.html");
+INSERT INTO babel_game VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html");
 
 INSERT INTO babel_trophy VALUES ("firstchallenge", "Lancez votre premier défi", 100, "noob");
 INSERT INTO babel_trophy VALUES ("fivechallenge", "Lancez cinq défis", 100, "5 défis");
@@ -15,12 +17,12 @@ INSERT INTO babel_trophy VALUES ("superman", "Gagnez 30 défis", 500, "imbattabl
 INSERT INTO babel_trophy VALUES ("flawlessvictory", "Gagnez un défi avec au moins 100 points d'écart", 500, "victoire écrasante");
 INSERT INTO babel_trophy VALUES ("soloman", "Jouez 50 parties sans lancer de défi", 200, "joueur solo");
 
-INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", 2);
-INSERT INTO babel_trophy_user_trophy VALUES ("500", 2);
-INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", 1);
-INSERT INTO babel_trophy_user_trophy VALUES ("fivechallenge", 1);
-INSERT INTO babel_trophy_user_trophy VALUES ("littleplayer", 2);
-INSERT INTO babel_trophy_user_trophy VALUES ("fiftychallenge", 1);
+INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", "mondentier");
+INSERT INTO babel_trophy_user_trophy VALUES ("500", "mondentier");
+INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", "claratatouille");
+INSERT INTO babel_trophy_user_trophy VALUES ("fivechallenge", "claratatouille");
+INSERT INTO babel_trophy_user_trophy VALUES ("littleplayer", "mondentier");
+INSERT INTO babel_trophy_user_trophy VALUES ("fiftychallenge", "claratatouille");
 
 INSERT INTO babel_challenge VALUES (1, "claratatouille", 321, "11/06/2015", "mondentier", 320, "hangman");
 INSERT INTO babel_challenge VALUES (2, "claratatouille", 321, "11/06/2015", "mondentier", 320, "jumpinhseep");
