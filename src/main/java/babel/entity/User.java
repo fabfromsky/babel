@@ -5,9 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,7 +25,8 @@ public class User {
 	public User(){};
 	
 	public User(String firstName, String lastName, String mail,
-			String username, String password, List<Trophy> trophies) {
+			String username, String password, List<Trophy> trophies,
+			List<Contact> contacts) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -34,8 +34,9 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.trophies = trophies;
+		this.contacts = contacts;
 	}
-
+	
 	@Column(nullable = false)
 	protected String firstName;
 	
@@ -57,6 +58,11 @@ public class User {
 	@JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
+	@JsonProperty("contacts")
+	@JsonManagedReference
+	protected List<Contact> contacts;
 
 	public String getFirstName() {
 		return firstName;
@@ -104,6 +110,14 @@ public class User {
 
 	public void setTrophies(List<Trophy> trophies) {
 		this.trophies = trophies;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 	
 }

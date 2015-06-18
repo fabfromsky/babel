@@ -16,7 +16,7 @@ public class Challenge {
 	public Challenge(){};
 	
 	public Challenge(int challengeId, Game game, String player,
-			String challenger, int playerScore, int challengerScore, String date) {
+			String challenger, Integer playerScore, Integer challengerScore, String date) {
 		super();
 		this.challengeId = challengeId;
 		this.game = game;
@@ -39,10 +39,10 @@ public class Challenge {
 	
 	protected String challenger;
 	
-	protected int playerScore;
+	protected Integer playerScore;
 	
 	@Column(nullable = true)
-	protected int challengerScore;
+	protected Integer challengerScore;
 	
 	protected String date;
 
@@ -86,11 +86,11 @@ public class Challenge {
 		this.playerScore = playerScore;
 	}
 
-	public int getChallengerScore() {
+	public Integer getChallengerScore() {
 		return challengerScore;
 	}
 
-	public void setChallengerScore(int challengerScore) {
+	public void setChallengerScore(Integer challengerScore) {
 		this.challengerScore = challengerScore;
 	}
 
@@ -101,6 +101,5 @@ public class Challenge {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
 	
 }

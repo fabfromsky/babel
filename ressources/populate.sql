@@ -4,7 +4,7 @@ INSERT INTO babel_user VALUES("mouillette", "John", "Doeuf", "mouillette@mail.co
 INSERT INTO babel_user VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789");
 
 INSERT INTO babel_game VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html");
-INSERT INTO babel_game VALUES ("jumpinhseep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinhseep.html");
+INSERT INTO babel_game VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinsheep.html");
 INSERT INTO babel_game VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html");
 
 INSERT INTO babel_trophy VALUES ("firstchallenge", "Lancez votre premier défi", 100, "noob");
@@ -24,9 +24,22 @@ INSERT INTO babel_trophy_user_trophy VALUES ("fivechallenge", "claratatouille");
 INSERT INTO babel_trophy_user_trophy VALUES ("littleplayer", "mondentier");
 INSERT INTO babel_trophy_user_trophy VALUES ("fiftychallenge", "claratatouille");
 
-INSERT INTO babel_challenge VALUES (1, "claratatouille", 321, "11/06/2015", "mondentier", 320, "hangman");
-INSERT INTO babel_challenge VALUES (2, "claratatouille", 321, "11/06/2015", "mondentier", 320, "jumpinhseep");
-INSERT INTO babel_challenge VALUES (3, "mondentier", 321, "10/06/2015", "claratatouille", 320, "jumpinhseep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "11/06/2015", "mondentier", null, "hangman");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "11/06/2015", "mondentier", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "10/06/2015", "claratatouille", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "11/06/2015", "claratatouille", null, "hangman");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mouillette", 321, "11/06/2015", "claratatouille", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("jobijoba", 321, "10/06/2015", "claratatouille", null, "jumpinsheep");
 
-INSERT INTO babel_message VALUES (1, "Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1");
-INSERT INTO babel_message VALUES (2, "Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2");
+INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1");
+INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2");
+INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "jobijoba", "claratatouille", "message 3");
+INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "message 4");
+INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "message 5");
+
+INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mouillette");
+INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mondentier");
+INSERT INTO babel_contact (username, contact) VALUES ("mondentier", "mouillette");
+INSERT INTO babel_contact (username, contact) VALUES ("jobijoba", "mouillette");
+INSERT INTO babel_contact (username, contact) VALUES ("mondentier", "claratatouille");
+INSERT INTO babel_contact (username, contact) VALUES ("mouillette", "claratatouille");

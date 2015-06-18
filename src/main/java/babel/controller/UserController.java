@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import babel.entity.Contact;
 import babel.entity.Trophy;
 import babel.entity.User;
 import babel.repository.UserRepository;
@@ -63,6 +64,17 @@ public class UserController {
 		public List<Trophy> getUserTrophies(@RequestParam(value = "username", required = true) String username) {
 			User user = userRepo.findByUsername(username);
 			return user.getTrophies();
+		}
+		
+		/**
+		 * Get user's list of contacts
+		 * @param username
+		 * @return a list of contacts 
+		 */
+		@RequestMapping(value = "/contacts", method = RequestMethod.GET, params = "username")
+		public List<Contact> getUserContacts(@RequestParam(value = "username", required = true) String username) {
+			User user = userRepo.findByUsername(username);
+			return user.getContacts();
 		}
 		
 		/**
