@@ -15,12 +15,13 @@ public class Game {
 	
 	public Game() {};
 	
-	public Game(String gameId, String gameName, String gameDescription, String gameUrl) {
+	public Game(String gameId, String gameName, String gameDescription, String gameUrl, String gameImg) {
 		super();
 		this.gameId = gameId;
 		this.gameName = gameName;
 		this.gameDescription = gameDescription;
 		this.gameUrl = gameUrl;
+		this.gameImg = gameImg;
 	}
 
 	@Id
@@ -31,6 +32,8 @@ public class Game {
 	protected String gameDescription;
 	
 	protected String gameUrl;
+	
+	protected String gameImg;
 
 	public String getGameId() {
 		return gameId;
@@ -62,6 +65,14 @@ public class Game {
 
 	public void setGameUrl(String gameUrl) {
 		this.gameUrl = gameUrl;
+	}
+
+	public String getGameImg() {
+		return gameImg;
+	}
+
+	public void setGameImg(String gameImg) {
+		this.gameImg = gameImg;
 	}
 	
 }

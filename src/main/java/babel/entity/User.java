@@ -25,16 +25,17 @@ public class User {
 	public User(){};
 	
 	public User(String firstName, String lastName, String mail,
-			String username, String password, List<Trophy> trophies,
-			List<Contact> contacts) {
+			String username, String pwd, List<Trophy> trophies,
+			List<Contact> contacts, String userImg) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mail = mail;
 		this.username = username;
-		this.password = password;
+		this.pwd = pwd;
 		this.trophies = trophies;
 		this.contacts = contacts;
+		this.userImg = userImg;
 	}
 	
 	@Column(nullable = false)
@@ -51,7 +52,7 @@ public class User {
 	protected String username;
 	
 	@Column(nullable = false)
-	protected String password;
+	protected String pwd;
 	
 	@Column(nullable = true)
 	@JsonProperty("trophies")
@@ -59,10 +60,14 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
 	
+	@Column(nullable = true)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
 	@JsonProperty("contacts")
 	@JsonManagedReference
 	protected List<Contact> contacts;
+	
+	@Column(nullable = true)
+	protected String userImg;
 
 	public String getFirstName() {
 		return firstName;
@@ -96,12 +101,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getpwd() {
+		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setpwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public List<Trophy> getTrophies() {
@@ -118,6 +123,14 @@ public class User {
 
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
 	}
 	
 }

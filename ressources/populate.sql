@@ -1,11 +1,14 @@
-INSERT INTO babel_user VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345");
-INSERT INTO babel_user VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456" );
-INSERT INTO babel_user VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567");
-INSERT INTO babel_user VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", null);
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", null);
 
-INSERT INTO babel_game VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html");
-INSERT INTO babel_game VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinsheep.html");
-INSERT INTO babel_game VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html", "pendu.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinsheep.html", "jumpinsheep.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html", "snake.jpg");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("taquin", "Reconstituer l'image en faisant le moins de coups possible !", "Le taquin", "/taquin.html", "taquin.gif");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("angrybird", "Les oiseaux sont en colère! Aidez-les à se venger des infâmes cochons!!", "Angry bird", "/angrybird.html", "angrybird.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("spaceinvaders", "Les extra-terrestres attaquent !! Défendez la planette contre ces envahisseurs", "Space invaders", "/spaceinvaders.html", "spaceinvaders.png");
 
 INSERT INTO babel_trophy VALUES ("firstchallenge", "Lancez votre premier défi", 100, "noob");
 INSERT INTO babel_trophy VALUES ("fivechallenge", "Lancez cinq défis", 100, "5 défis");
