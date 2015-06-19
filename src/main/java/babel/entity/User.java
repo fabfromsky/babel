@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,7 +25,7 @@ public class User {
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg) {
+			List<Contact> contacts, String userImg, float userPoints) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,6 +35,7 @@ public class User {
 		this.trophies = trophies;
 		this.contacts = contacts;
 		this.userImg = userImg;
+		this.userPoints = userPoints;
 	}
 	
 	@Column(nullable = false)
@@ -65,10 +65,12 @@ public class User {
 	@JsonProperty("contacts")
 	@JsonManagedReference
 	protected List<Contact> contacts;
-	
+		
 	@Column(nullable = true)
 	protected String userImg;
 
+	protected float userPoints;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -101,14 +103,6 @@ public class User {
 		this.username = username;
 	}
 
-	public String getpwd() {
-		return pwd;
-	}
-
-	public void setpwd(String pwd) {
-		this.pwd = pwd;
-	}
-
 	public List<Trophy> getTrophies() {
 		return trophies;
 	}
@@ -131,6 +125,27 @@ public class User {
 
 	public void setUserImg(String userImg) {
 		this.userImg = userImg;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public float getUserPoints() {
+		float trophyPoints = 0;
+		List <Trophy> trophies = this.getTrophies();
+		for(int i=0; i<trophies.size(); i++) {
+			trophyPoints += trophies.get(i).getPoints();
+		}
+		return (userPoints + trophyPoints);
+	}
+
+	public void setUserPoints(float userPoints) {
+		this.userPoints = userPoints;
 	}
 	
 }
