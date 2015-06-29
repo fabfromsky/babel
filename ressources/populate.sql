@@ -4,7 +4,7 @@ INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VA
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", null);
 
 INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html", "pendu.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "/jumpinsheep.html", "jumpinsheep.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "games/doodlejump/index.html", "jumpinsheep.png");
 INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html", "snake.jpg");
 INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("taquin", "Reconstituez l'image en faisant le moins de coups possible !", "Le taquin", "/taquin.html", "taquin.png");
 INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("angrybird", "Les oiseaux sont en colère! Aidez-les à se venger des infâmes cochons!!", "Angry bird", "/angrybird.html", "angrybird.png");

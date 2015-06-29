@@ -24,6 +24,11 @@ public class TrophyController {
 	@Autowired
 	private TrophyRepository trophyRepo;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Trophy> getAllTrophies() {
+		return trophyRepo.findAll();
+		
+	}
 	/**
 	 * create a new trophy
 	 * @param trophy
