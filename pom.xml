@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
+		<version>1.2.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -39,10 +39,10 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>cn.guoyukun.jdbc</groupId>
-			<artifactId>oracle-ojdbc6</artifactId>
-			<version>11.2.0.3.0</version>
-		</dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+        </dependency>
 		
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
@@ -71,52 +71,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.1.6.RELEASE</version>
+		</dependency>
 
-
-		<!-- TEST -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec.javax.transaction</groupId>
-			<artifactId>jboss-transaction-api_1.2_spec</artifactId>
-			<version>1.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-cypher-compiler-2.1</artifactId>
-			<version>2.1.5</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path-assert</artifactId>
-			<version>0.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>uk.co.datumedge</groupId>
-			<artifactId>hamcrest-json</artifactId>
-			<version>0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>
-				spring-boot-starter-cloud-connectors
-			</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>4.1.6.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -145,12 +110,6 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>devoracle</id>
-			<properties>
-				<spring.profile>devoracle</spring.profile>
-			</properties>
-		</profile>
-		<profile>
 			<id>prod</id>
 			<properties>
 				<spring.profile>prod</spring.profile>
@@ -158,12 +117,6 @@
 			<build>
 				<finalName>babel-back</finalName>
 			</build>
-		</profile>
-		<profile>
-			<id>staging</id>
-			<properties>
-				<spring.profile>staging</spring.profile>
-			</properties>
 		</profile>
 	</profiles>
 
