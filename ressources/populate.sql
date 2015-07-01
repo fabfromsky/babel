@@ -1,9 +1,9 @@
 USE babel;
 
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", null);
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", null);
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_points, user_game_count, user_victories, user_challenges) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg", 55648, 150, 120, 145);
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_points, user_game_count, user_victories, user_challenges) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg", 8695, 52, 25, 49);
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_points, user_game_count, user_victories, user_challenges) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", null, 540, 12, 2, 6);
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_points, user_game_count, user_victories, user_challenges) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", "jobijoba.jpg", 15023, 78, 54, 68);
 
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "pendu.png");
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "jumpinsheep.png");
@@ -18,35 +18,55 @@ INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES (
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("ntyze", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 11", "default.png");
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("zeqvbtb", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 12", "default.png");
 
-INSERT INTO babel_trophy VALUES ("firstchallenge", "Lancez votre premier défi", 100, "noob");
-INSERT INTO babel_trophy VALUES ("fivechallenge", "Lancez cinq défis", 100, "5 défis");
-INSERT INTO babel_trophy VALUES ("500", "Atteignez 500 points", 100, "500 points");
-INSERT INTO babel_trophy VALUES ("fiftyfriend", "Ajoutez 50 amis", 100, "50 amis");
-INSERT INTO babel_trophy VALUES ("littleplayer", "Jouez 10 parties", 100, "Petit joueur");
-INSERT INTO babel_trophy VALUES ("fiftychallenge", "Lancez 50 défis", 500, "50 défis");
-INSERT INTO babel_trophy VALUES ("superman", "Gagnez 30 défis", 500, "imbattable");
-INSERT INTO babel_trophy VALUES ("flawlessvictory", "Gagnez un défi avec au moins 100 points d'écart", 500, "victoire écrasante");
-INSERT INTO babel_trophy VALUES ("soloman", "Jouez 50 parties sans lancer de défi", 200, "joueur solo");
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("games", "newbie", "Newbie", "Jouez votre première partie", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("games", "goodstart", "C'est un bon début", "Jouez 50 parties", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("games", "littleplayer", "Petit joueur", "Jouez 100 parties", 500);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("games", "addict", "Accroc", "Jouez 500 parties", 500);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("games", "veteran", "Vétéran", "Jouez 1000 parties", 1000);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("points", "feather", "Poid plume", "Atteignez 500 points", 50);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("points", "barracuda", "Barracuda", "Atteignez 1000 points", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("points", "therock", "The rock", "Atteignez 5000 points", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("points", "themountain", "La Montagne", "Atteignez 10000 points", 500);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("points", "thehulk", "Hulk", "Atteignez 50000 points", 1000);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("challenges", "padawan", "Padawan", "Remporter 10 défis", 50);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("challenges", "hitman", "Hitman", "Remporter 100 défis", 50);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("challenges", "virtuose", "Virtuose", "Remporter 500 défis", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("challenges", "superman", "Superman", "Remporter 1000 défis", 100);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("challenges", "terminator", "Terminator", "Remporter 5000 défis", 500);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("other", "flawlessvictory", "Victoire écrasante", "Remporter un défi aevc au moins 500 points d'écarts", 500);
+INSERT INTO babel_trophy (trophy_category, trophy_title, trophy_name, description, points) VALUES ("other", "galacticshame", "Honte intergalactique", "Perdre un défi aevc au moins 500 points d'écarts", 100);
 
-INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", "mondentier");
-INSERT INTO babel_trophy_user_trophy VALUES ("500", "mondentier");
-INSERT INTO babel_trophy_user_trophy VALUES ("firstchallenge", "claratatouille");
-INSERT INTO babel_trophy_user_trophy VALUES ("fivechallenge", "claratatouille");
-INSERT INTO babel_trophy_user_trophy VALUES ("littleplayer", "mondentier");
-INSERT INTO babel_trophy_user_trophy VALUES ("fiftychallenge", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("1", "mondentier");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("2", "mondentier");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("17", "mondentier");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("1", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("2", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("3", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("6", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("7", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("8", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("9", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("11", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("12", "claratatouille");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("1", "jobijoba");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("2", "jobijoba");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("6", "jobijoba");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("7", "jobijoba");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("11", "jobijoba");
+INSERT INTO babel_user_trophies (trophy_id, username) VALUES ("16", "jobijoba");
 
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "11/06/2015", "mondentier", null, "hangman");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "11/06/2015", "mondentier", null, "jumpinsheep");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "10/06/2015", "claratatouille", null, "jumpinsheep");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "11/06/2015", "claratatouille", null, "hangman");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mouillette", 321, "11/06/2015", "claratatouille", null, "jumpinsheep");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("jobijoba", 321, "10/06/2015", "claratatouille", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "hangman");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "hangman");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mouillette", 321, "1434029757", "claratatouille", null, "jumpinsheep");
+INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("jobijoba", 321, "1434029757", "claratatouille", null, "jumpinsheep");
 
-INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1");
-INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2");
-INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "jobijoba", "claratatouille", "message 3");
-INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "message 4");
-INSERT INTO babel_message (content, sender, receiver, title) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "message 5");
+INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1", "1434029755");
+INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2", "1434029756");
+INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "jobijoba", "claratatouille", "message 3", "1434029759");
+INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "message 4", "1434029768");
+INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "message 5", "1434029775");
 
 INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mouillette");
 INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mondentier");

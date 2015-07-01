@@ -17,13 +17,14 @@ public class Message {
 		public Message() {};
 		
 		public Message(int messageId, String sender, String receiver,
-				String title, String content) {
+				String title, String content, String date) {
 			super();
 			this.messageId = messageId;
 			this.sender = sender;
 			this.receiver = receiver;
 			this.title = title;
 			this.content = content;
+			this.date = date;
 		}
 
 		@Id
@@ -37,6 +38,8 @@ public class Message {
 		protected String title;
 		
 		protected String content;
+		
+		protected String date;
 
 		public int getMessageId() {
 			return messageId;
@@ -77,6 +80,13 @@ public class Message {
 		public void setContent(String content) {
 			this.content = content;
 		}
-		
-		
+
+		public String getDate() {
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
+		}
+			
 }

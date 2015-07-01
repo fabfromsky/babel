@@ -25,7 +25,7 @@ public class User {
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg, float userPoints) {
+			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,6 +36,9 @@ public class User {
 		this.contacts = contacts;
 		this.userImg = userImg;
 		this.userPoints = userPoints;
+		this.userChallenges = userChallenges;
+		this.userGameCount = userGameCount;
+		this.userVictories = userVictories;
 	}
 	
 	@Column(nullable = false)
@@ -70,6 +73,12 @@ public class User {
 	protected String userImg;
 
 	protected float userPoints;
+	
+	protected int userGameCount;
+	
+	protected int userChallenges;
+	
+	protected int userVictories;
 	
 	public String getFirstName() {
 		return firstName;
@@ -146,6 +155,30 @@ public class User {
 
 	public void setUserPoints(float userPoints) {
 		this.userPoints = userPoints;
+	}
+
+	public int getUserGameCount() {
+		return userGameCount;
+	}
+
+	public void setUserGameCount(int userGameNumber) {
+		this.userGameCount = userGameNumber;
+	}
+
+	public int getUserChallenges() {
+		return userChallenges;
+	}
+
+	public void setUserChallenges(int userChallenges) {
+		this.userChallenges = userChallenges;
+	}
+
+	public int getUserVictories() {
+		return userVictories;
+	}
+
+	public void setUserVictories(int userVictories) {
+		this.userVictories = userVictories;
 	}
 	
 }

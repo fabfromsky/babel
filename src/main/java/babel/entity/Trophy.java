@@ -3,8 +3,11 @@ package babel.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -19,35 +22,44 @@ public class Trophy {
 
 	public Trophy(){};
 
-	public Trophy(String trophyId, List<User> userTrophy, String trophyName,
-			int points, String description) {
+	public Trophy(int trophyId, List<User> userTrophy, String trophyName,
+			int points, String description, String trophyCategory, String trophyTitle) {
 		super();
 		this.trophyId = trophyId;
+		this.trophyTitle = trophyTitle;
 		this.userTrophy = userTrophy;
 		this.trophyName = trophyName;
 		this.points = points;
 		this.description = description;
+		this.trophyCategory = trophyCategory;
 	}
 
 	@Id
-	protected String trophyId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	protected int trophyId;
+
+	protected String trophyName;
+	
+	protected String trophyTitle;
+	
+	protected String trophyCategory;
 	
 	@JsonBackReference
 	@ManyToMany()
-	@JoinColumn(name="username")
+	@JoinTable(name="babel_user_trophies",
+		joinColumns = @JoinColumn(name="trophyId"),
+		inverseJoinColumns = @JoinColumn(name="username"))
 	protected List<User> userTrophy;
-
-	protected String trophyName;
 	
 	protected int points;
 	
 	protected String description;
 
-	public String getTrophyId() {
+	public int getTrophyId() {
 		return trophyId;
 	}
 
-	public void setTrophyId(String trophyId) {
+	public void setTrophyId(int trophyId) {
 		this.trophyId = trophyId;
 	}
 
@@ -81,6 +93,22 @@ public class Trophy {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getTrophyCategory() {
+		return trophyCategory;
+	}
+
+	public void setTrophyCategory(String trophyCategory) {
+		this.trophyCategory = trophyCategory;
+	}
+
+	public String getTrophyTitle() {
+		return trophyTitle;
+	}
+
+	public void setTrophyTitle(String trophyTitle) {
+		this.trophyTitle = trophyTitle;
 	}	
 		
 }

@@ -3,6 +3,7 @@ package babel.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import babel.repository.TrophyRepository;
  *
  */
 @RestController
-@RequestMapping("/trophy")
+@RequestMapping("/trophies")
 public class TrophyController {
 	
 	@Autowired
@@ -25,8 +26,12 @@ public class TrophyController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Trophy> getAllTrophies() {
-		return trophyRepo.findAll();
+		return trophyRepo.findAll(sortByCategoryAsc());
 		
+	}
+	private Sort sortByCategoryAsc() {
+		// TODO Auto-generated method stub
+		return new Sort(Sort.Direction.ASC, "trophyCategory");
 	}
 	/**
 	 * create a new trophy
