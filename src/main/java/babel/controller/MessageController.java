@@ -31,7 +31,7 @@ public class MessageController {
 	@RequestMapping(method = RequestMethod.GET, params = "username")
 	public List<Message> getMessagesByUsername(@RequestParam(value = "username", required = true) String username) {
 		
-		return messageRepo.findByReceiverOrSender(username, username);
+		return messageRepo.findByReceiverOrSenderOrderByMessageIdDesc(username, username);
 	}
 	
 	/**
