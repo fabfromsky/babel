@@ -26,7 +26,7 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeRepository challengeRepo;
 
-	private Set challengesSet = new HashSet();
+	private Set<Challenge> challengesSet = new HashSet<Challenge>();
 
 	/**
 	 * find challenges by field "player"
@@ -46,6 +46,16 @@ public class ChallengeController {
 	@RequestMapping(method = RequestMethod.GET, params = {"challenger"})
 	public List<Challenge> getChallengesByChallenger(@RequestParam(value = "challenger", required = true) String challenger){
 		return challengeRepo.findByChallenger(challenger);
+	}
+	
+	/**
+	 * find challenge by challengeId
+	 * @param challengeid
+	 * @return object challenge
+	 */
+	@RequestMapping(method = RequestMethod.GET, params = {"challengeid"})
+	public Challenge getChallengeByChallengeId(@RequestParam(value = "challengeid", required = true) int challengeid) {
+		return challengeRepo.findByChallengeId(challengeid);
 	}
 
 	/**

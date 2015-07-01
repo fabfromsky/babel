@@ -9,4 +9,5 @@ import babel.entity.Challenge;
 public interface ChallengeRepository extends JpaRepository<Challenge, Long>{
 	public List<Challenge> findByPlayer(String player);
 	public List<Challenge> findByChallenger(String player);
+	public Challenge findByChallengeId(int challengeid);
 }
