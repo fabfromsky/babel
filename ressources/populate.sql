@@ -1,20 +1,22 @@
+USE babel;
+
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg");
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg");
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", null);
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", null);
 
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "/pendu.html", "pendu.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "games/doodlejump/index.html", "jumpinsheep.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "/snake.html", "snake.jpg");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("taquin", "Reconstituez l'image en faisant le moins de coups possible !", "Le taquin", "/taquin.html", "taquin.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("angrybird", "Les oiseaux sont en colère! Aidez-les à se venger des infâmes cochons!!", "Angry bird", "/angrybird.html", "angrybird.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("spaceinvaders", "Les extra-terrestres attaquent !! Défendez la planette contre ces envahisseurs", "Space invaders", "/spaceinvaders.html", "spaceinvader.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("zqgtsrt", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 7", "/spaceinvaders.html", "default.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("gbwxfyame8", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 8", "/spaceinvaders.html", "default.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("cze", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 9", "/spaceinvaders.html", "default.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("abeery", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 10", "/spaceinvaders.html", "default.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("ntyze", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 11", "/spaceinvaders.html", "default.png");
-INSERT INTO babel_game (game_id, game_description, game_name, game_url, game_img) VALUES ("zeqvbtb", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 12", "/spaceinvaders.html", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "pendu.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "jumpinsheep.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("snake", "Faites grandir snake en mangeant. Mais attention à ne pas vous mordre la queue!", "Snake", "snake.jpg");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("taquin", "Reconstituez l'image en faisant le moins de coups possible !", "Le taquin", "taquin.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("angrybird", "Les oiseaux sont en colère! Aidez-les à se venger des infâmes cochons!!", "Angry bird", "angrybird.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("spaceinvaders", "Les extra-terrestres attaquent !! Défendez la planette contre ces envahisseurs", "Space invaders", "spaceinvader.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("felfkkmls", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 7", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("gbwxfyame8", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 8", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("hzdfij", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 9", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("lseopfgr", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 10", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("ntyze", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 11", "default.png");
+INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("zeqvbtb", "Cupcake ipsum dolor sit amet apple pie. Topping tiramisu cotton candy chocolate oat cake cheesecake sweet toffee.", "game 12", "default.png");
 
 INSERT INTO babel_trophy VALUES ("firstchallenge", "Lancez votre premier défi", 100, "noob");
 INSERT INTO babel_trophy VALUES ("fivechallenge", "Lancez cinq défis", 100, "5 défis");

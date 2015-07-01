@@ -15,12 +15,11 @@ public class Game {
 	
 	public Game() {};
 	
-	public Game(String gameId, String gameName, String gameDescription, String gameUrl, String gameImg) {
+	public Game(String gameId, String gameName, String gameDescription, String gameImg) {
 		super();
 		this.gameId = gameId;
 		this.gameName = gameName;
 		this.gameDescription = gameDescription;
-		this.gameUrl = gameUrl;
 		this.gameImg = gameImg;
 	}
 
@@ -30,8 +29,6 @@ public class Game {
 	protected String gameName;
 	
 	protected String gameDescription;
-	
-	protected String gameUrl;
 	
 	protected String gameImg;
 
@@ -57,14 +54,6 @@ public class Game {
 
 	public void setGameDescription(String gameDescription) {
 		this.gameDescription = gameDescription;
-	}
-
-	public String getGameUrl() {
-		return gameUrl;
-	}
-
-	public void setGameUrl(String gameUrl) {
-		this.gameUrl = gameUrl;
 	}
 
 	public String getGameImg() {
