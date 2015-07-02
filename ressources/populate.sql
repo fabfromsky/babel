@@ -68,12 +68,12 @@ INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lore
 INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "message 4", "1434029768");
 INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "message 5", "1434029775");
 
-INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mouillette");
-INSERT INTO babel_contact (username, contact) VALUES ("claratatouille", "mondentier");
-INSERT INTO babel_contact (username, contact) VALUES ("mondentier", "mouillette");
-INSERT INTO babel_contact (username, contact) VALUES ("jobijoba", "mouillette");
-INSERT INTO babel_contact (username, contact) VALUES ("mondentier", "claratatouille");
-INSERT INTO babel_contact (username, contact) VALUES ("mouillette", "claratatouille");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("claratatouille", "mouillette");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("claratatouille", "mondentier");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("mondentier", "mouillette");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("jobijoba", "mouillette");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("mondentier", "claratatouille");
+INSERT INTO babel_contact (manage_contact, contact) VALUES ("mouillette", "claratatouille");
 
 INSERT INTO babel_user_games (game_id, username, score) VALUES ("jumpinsheep", "claratatouille", 679);
 INSERT INTO babel_user_games (game_id, username, score) VALUES ("hangman", "claratatouille", 456);

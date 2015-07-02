@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,7 +26,7 @@ public class User {
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories) {
+			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories, List<Contact> manageContact, List<UserGames> games) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -34,6 +35,8 @@ public class User {
 		this.pwd = pwd;
 		this.trophies = trophies;
 		this.contacts = contacts;
+		this.games = games;
+		this.manageContact = manageContact;
 		this.userImg = userImg;
 		this.userPoints = userPoints;
 		this.userChallenges = userChallenges;
@@ -66,8 +69,18 @@ public class User {
 	@Column(nullable = true)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
 	@JsonProperty("contacts")
-	@JsonManagedReference
 	protected List<Contact> contacts;
+	
+	@JsonIgnore
+	@Column(nullable = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+	protected List<Contact> manageContact;
+	
+	@Column(nullable = true)
+	@JsonProperty("games")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonManagedReference
+	protected List<UserGames> games;
 		
 	@Column(nullable = true)
 	protected String userImg;
@@ -144,13 +157,26 @@ public class User {
 		this.pwd = pwd;
 	}
 
+	public List<UserGames> getGames() {
+		return games;
+	}
+
+	public void setGames(List<UserGames> games) {
+		this.games = games;
+	}
+
 	public float getUserPoints() {
 		float trophyPoints = 0;
 		List <Trophy> trophies = this.getTrophies();
 		for(int i=0; i<trophies.size(); i++) {
 			trophyPoints += trophies.get(i).getPoints();
 		}
-		return (userPoints + trophyPoints);
+		float gamesPoints = 0;
+		List<UserGames> games = this.getGames();
+		for(int j=0; j<games.size(); j++) {
+			gamesPoints += games.get(j).getScore();
+		}
+		return (gamesPoints + trophyPoints);
 	}
 
 	public void setUserPoints(float userPoints) {
@@ -158,6 +184,8 @@ public class User {
 	}
 
 	public int getUserGameCount() {
+		int userGameCount = 0;
+		userGameCount = this.getGames().size();
 		return userGameCount;
 	}
 
@@ -179,6 +207,14 @@ public class User {
 
 	public void setUserVictories(int userVictories) {
 		this.userVictories = userVictories;
+	}
+
+	public List<Contact> getManageContact() {
+		return manageContact;
+	}
+
+	public void setManageContact(List<Contact> manageContact) {
+		this.manageContact = manageContact;
 	}
 	
 }
