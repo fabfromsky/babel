@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -75,8 +76,10 @@ public class User {
 	@Column(nullable = true)
 	protected String userImg;
 
+	@Transient
 	protected float userPoints;
 	
+	@Transient
 	protected int userGameCount;
 	
 	protected int userChallenges;
