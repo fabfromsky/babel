@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import babel.entity.User;
 import babel.entity.UserGames;
 
 public interface UserGamesRepository extends JpaRepository<UserGames, Long>{
 
-	public List<UserGames> findByUser(String user);
+	public List<UserGames> findByUser(User user);
 
 }

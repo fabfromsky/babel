@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import babel.entity.Contact;
 import babel.entity.Trophy;
 import babel.entity.User;
+import babel.repository.UserGamesRepository;
 import babel.repository.UserRepository;
 
 /**
@@ -25,6 +26,9 @@ public class UserController {
 
 		@Autowired
 		private UserRepository userRepo;
+		
+		@Autowired
+		private UserGamesRepository userGamesRepo;
 		
 		/**
 		 * Return user's informations
@@ -89,5 +93,5 @@ public class UserController {
 //			trophées.add(trophy);
 //			user.setTrophies(trophées);
 //			userRepo.save(user);
-//		}		
+//		}	
 }

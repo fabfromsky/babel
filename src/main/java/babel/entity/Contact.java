@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,12 +17,11 @@ public class Contact {
 
 		public Contact(){};
 		
-		public Contact(int contactId, User user1, User contact, String contactName) {
+		public Contact(int contactId, User user1, String contact) {
 			super();
 			this.contactId = contactId;
 			this.user1 = user1;
 			this.contact = contact;
-			this.contactName = contactName;
 		}
 
 		@Id
@@ -32,17 +30,11 @@ public class Contact {
 		protected int contactId;
 		
 		@ManyToOne
-		@JoinColumn(name = "contact")
-		@JsonBackReference
+		@JoinColumn(name = "username")
+		@JsonBackReference("contact")
 		protected User user1;
 		
-		@ManyToOne
-		@JoinColumn(name = "manageContact")
-		@JsonBackReference
-		protected User contact;
-		
-		@Transient
-		protected String contactName;
+		protected String contact;
 
 		public int getContactId() {
 			return contactId;
@@ -60,20 +52,12 @@ public class Contact {
 			this.user1 = user1;
 		}
 
-		public User getContact() {
+		public String getContact() {
 			return contact;
 		}
 
-		public void setContact(User contact) {
+		public void setContact(String contact) {
 			this.contact = contact;
-		}
-
-		public String getContactName() {
-			return this.getContact().username;
-		}
-
-		public void setContactName(String contactName) {
-			this.contactName = contactName;
-		}		
+		}	
 		
 }

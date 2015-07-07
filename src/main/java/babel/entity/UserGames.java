@@ -5,12 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -21,12 +18,11 @@ public class UserGames {
 	
 	public UserGames(){}
 	
-	public UserGames(int userGameId, User user, Game game, int score, String gameName) {
+	public UserGames(int userGameId, String user, String game, int score) {
 		super();
 		this.userGameId = userGameId;
 		this.user = user;
 		this.game = game;
-		this.gameName = gameName;
 		this.score = score;
 	}
 
@@ -35,15 +31,9 @@ public class UserGames {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int userGameId;
 	
-	@JsonBackReference
-	@ManyToOne()
-	@JoinColumn(name="username")
-	protected User user;
+	protected String user;
 	
-	@JsonBackReference
-	@ManyToOne()
-	@JoinColumn(name="gameId")
-	protected Game game;
+	protected String game;
 	
 	@Transient
 	protected String gameName;
@@ -58,19 +48,19 @@ public class UserGames {
 		this.userGameId = userGameId;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 
-	public Game getGame() {
+	public String getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
+	public void setGame(String game) {
 		this.game = game;
 	}
 
@@ -80,14 +70,6 @@ public class UserGames {
 
 	public void setScore(int score) {
 		this.score = score;
-	}
-
-	public String getGameName() {
-		return this.getGame().gameId;
-	}
-
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
 	}
 	
 	

@@ -12,8 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -26,7 +24,7 @@ public class User {
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories, List<Contact> manageContact, List<UserGames> games) {
+			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories, List<UserGames> games) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,7 +34,6 @@ public class User {
 		this.trophies = trophies;
 		this.contacts = contacts;
 		this.games = games;
-		this.manageContact = manageContact;
 		this.userImg = userImg;
 		this.userPoints = userPoints;
 		this.userChallenges = userChallenges;
@@ -62,24 +59,17 @@ public class User {
 	
 	@Column(nullable = true)
 	@JsonProperty("trophies")
-	@JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userTrophy")
 	protected List<Trophy> trophies;
 	
 	@Column(nullable = true)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
-	@JsonProperty("contacts")
+	@JsonProperty("contact")
 	protected List<Contact> contacts;
-	
-	@JsonIgnore
-	@Column(nullable = true)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
-	protected List<Contact> manageContact;
 	
 	@Column(nullable = true)
 	@JsonProperty("games")
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonManagedReference
 	protected List<UserGames> games;
 		
 	@Column(nullable = true)
@@ -207,14 +197,6 @@ public class User {
 
 	public void setUserVictories(int userVictories) {
 		this.userVictories = userVictories;
-	}
-
-	public List<Contact> getManageContact() {
-		return manageContact;
-	}
-
-	public void setManageContact(List<Contact> manageContact) {
-		this.manageContact = manageContact;
 	}
 	
 }
