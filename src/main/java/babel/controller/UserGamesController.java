@@ -24,12 +24,21 @@ public class UserGamesController {
 	@Autowired
 	private UserGamesRepository userGamesRepo;
 	
+	/**
+	 * Returns user's games list
+	 * @param username
+	 * @return list of UserGames
+	 */
 	@RequestMapping(method = RequestMethod.GET, params = {"username"})
 	public List<UserGames> getUserByUsername(@RequestParam(value = "username", required = true) String username) {
 		User user = userRepo.findByUsername(username);
 		return userGamesRepo.findByUser(user);
 	}
 	
+	/**
+	 * add a game to user's list
+	 * @param game
+	 */
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public void addGame(@RequestBody UserGames game) {
 		userGamesRepo.save(game);
