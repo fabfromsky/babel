@@ -3,7 +3,6 @@ package babel.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +30,11 @@ public class UserController {
 		@Autowired
 		private UserGamesRepository userGamesRepo;
 		
+		/**
+		 * Search contacts with username containing search parameter
+		 * @param search
+		 * @return list of users
+		 */
 		@RequestMapping(value="/search", method = RequestMethod.GET, params = {"search"})
 		public List<User> getAllUsers(@RequestParam(value = "search") String search){
 			List<User> result = userRepo.searchByUsernameLike(search);

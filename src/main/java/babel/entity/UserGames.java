@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -34,9 +33,6 @@ public class UserGames {
 	protected String user;
 	
 	protected String game;
-	
-	@Transient
-	protected String gameName;
 	
 	protected int score;
 

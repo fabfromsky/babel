@@ -25,7 +25,9 @@ public class User {
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg, float userPoints, int userChallenges, int userGameCount, int userVictories, List<UserGames> games) {
+			List<Contact> contacts, String userImg, float userPoints, 
+			int userChallenges, int userGameCount, int userVictories, 
+			List<UserGames> games, String sex) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -40,6 +42,7 @@ public class User {
 		this.userChallenges = userChallenges;
 		this.userGameCount = userGameCount;
 		this.userVictories = userVictories;
+		this.sex = sex;
 	}
 	
 	@Column(nullable = false)
@@ -64,9 +67,13 @@ public class User {
 	protected List<Trophy> trophies;
 	
 	@Column(nullable = true)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonProperty("contact")
 	protected List<Contact> contacts;
+	
+	@Column(nullable = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+	protected List<Contact> manageContacts;
 	
 	@Column(nullable = true)
 	@JsonProperty("games")
@@ -85,6 +92,8 @@ public class User {
 	protected int userChallenges;
 	
 	protected int userVictories;
+	
+	protected String sex;
 	
 	public String getFirstName() {
 		return firstName;
@@ -135,7 +144,13 @@ public class User {
 	}
 
 	public String getUserImg() {
-		return userImg;
+		if(userImg != null) {
+			return userImg;
+		}
+		else {
+			return this.getSex() + ".jpg";
+		}
+		
 	}
 
 	public void setUserImg(String userImg) {
@@ -200,6 +215,22 @@ public class User {
 
 	public void setUserVictories(int userVictories) {
 		this.userVictories = userVictories;
+	}
+
+	public List<Contact> getManageContacts() {
+		return manageContacts;
+	}
+
+	public void setManageContacts(List<Contact> manageContacts) {
+		this.manageContacts = manageContacts;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 }

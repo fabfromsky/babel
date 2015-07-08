@@ -4,11 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -17,10 +14,10 @@ public class Contact {
 
 		public Contact(){};
 		
-		public Contact(int contactId, User user1, String contact) {
+		public Contact(int contactId, String user, String contact) {
 			super();
 			this.contactId = contactId;
-			this.user1 = user1;
+			this.user = user;
 			this.contact = contact;
 		}
 
@@ -29,10 +26,7 @@ public class Contact {
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		protected int contactId;
 		
-		@ManyToOne
-		@JoinColumn(name = "username")
-		@JsonBackReference("contact")
-		protected User user1;
+		protected String user;
 		
 		protected String contact;
 
@@ -44,12 +38,12 @@ public class Contact {
 			this.contactId = contactId;
 		}
 
-		public User getUser1() {
-			return user1;
+		public String getUser() {
+			return user;
 		}
 
-		public void setUser1(User user1) {
-			this.user1 = user1;
+		public void setUser(String user) {
+			this.user = user;
 		}
 
 		public String getContact() {
