@@ -4,6 +4,11 @@ INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, us
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg", 25, 49, "M");
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", "mouillette.jpg", 2, 6, "M");
 INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", "jobijoba.jpg", 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("quenotte", "Adam", "Labrosse", "labrosseadam@mail.com", "wlkdrjt", null, 54, 68, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("popmusic", "Agathe", "Youbeb", "igotubabe@mail.com", "rhtewh", null, 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("pokerface", "Jack", "Pote", "pokerface@mail.com", "sefr54", null, 54, 68, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("maguybole", "Magguy", "Bole", "maguybole@mail.com", "q5f4e5", null, 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("saravigote", "Sarah", "Vigote", "saravigote@mail.com", "dfg4df5", null, 54, 68, "F");
 
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "pendu.png");
 INSERT INTO babel_game (game_id, game_description, game_name, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "jumpinsheep.png");
@@ -74,6 +79,10 @@ INSERT INTO babel_contact (user, contact) VALUES ("mondentier", "mouillette");
 INSERT INTO babel_contact (user, contact) VALUES ("jobijoba", "mouillette");
 INSERT INTO babel_contact (user, contact) VALUES ("mondentier", "claratatouille");
 INSERT INTO babel_contact (user, contact) VALUES ("mouillette", "claratatouille");
+INSERT INTO babel_contact (user, contact) VALUES ("saravigote", "claratatouille");
+INSERT INTO babel_contact (user, contact) VALUES ("maguybole", "claratatouille");
+INSERT INTO babel_contact (user, contact) VALUES ("pokerface", "claratatouille");
+INSERT INTO babel_contact (user, contact) VALUES ("popmusic", "claratatouille");
 
 INSERT INTO babel_user_games (game, user, score) VALUES ("jumpinsheep", "claratatouille", 679);
 INSERT INTO babel_user_games (game, user, score) VALUES ("hangman", "claratatouille", 456);

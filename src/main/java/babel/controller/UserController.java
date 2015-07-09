@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import babel.entity.Contact;
 import babel.entity.Trophy;
 import babel.entity.User;
+import babel.repository.ContactRepository;
 import babel.repository.UserGamesRepository;
 import babel.repository.UserRepository;
 
@@ -30,14 +31,23 @@ public class UserController {
 		@Autowired
 		private UserGamesRepository userGamesRepo;
 		
+		@Autowired
+		private ContactRepository contactRepo;
+		
 		/**
-		 * Search contacts with username containing search parameter
+		 * Search users with username containing search parameter 
 		 * @param search
 		 * @return list of users
 		 */
-		@RequestMapping(value="/search", method = RequestMethod.GET, params = {"search"})
-		public List<User> getAllUsers(@RequestParam(value = "search") String search){
+		@RequestMapping(value="/search", method = RequestMethod.GET, params = {"search", "username"})
+		public List<User> getAllUsers(@RequestParam(value = "search") String search, @RequestParam(value = "username") String username){
 			List<User> result = userRepo.searchByUsernameLike(search);
+			List<Contact> contacts = contactRepo.findByUser(username);
+			/*remove contacts already addded*/
+			for(int i=0; i<contacts.size(); i++) {
+				User contactUser = userRepo.findByUsername(contacts.get(i).getContact());
+				result.remove(contactUser);
+			}
 			return result;
 		}
 		/**

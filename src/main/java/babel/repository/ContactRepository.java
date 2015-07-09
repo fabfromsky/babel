@@ -9,5 +9,7 @@ import babel.entity.Contact;
 public interface ContactRepository extends JpaRepository<Contact, Long>{
 
 	List<Contact> findByContact(String username);
+
+	List<Contact> findByUser(String username);
 	
 }

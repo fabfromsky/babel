@@ -24,6 +24,10 @@ public class TrophyController {
 	@Autowired
 	private TrophyRepository trophyRepo;
 
+	/**
+	 * get all trophies
+	 * @return list of trophies
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Trophy> getAllTrophies() {
 		return trophyRepo.findAll(sortByCategoryAsc());
