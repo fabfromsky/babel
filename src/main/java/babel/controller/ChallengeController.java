@@ -23,26 +23,6 @@ public class ChallengeController {
 
 	@Autowired
 	private ChallengeRepository challengeRepo;
-
-	/**
-	 * find challenges by field "player"
-	 * @param player
-	 * @return list of challenges
-	 */
-	@RequestMapping(method = RequestMethod.GET, params = {"player"})
-	public List<Challenge> getChallengesByPlayer(@RequestParam(value = "player", required = true) String player){
-		return challengeRepo.findByPlayer(player);
-	}
-
-	/**
-	 * find challenges by field "challenger"
-	 * @param challenger
-	 * @return list of challenges
-	 */
-	@RequestMapping(method = RequestMethod.GET, params = {"challenger"})
-	public List<Challenge> getChallengesByChallenger(@RequestParam(value = "challenger", required = true) String challenger){
-		return challengeRepo.findByChallenger(challenger);
-	}
 	
 	/**
 	 * find challenge by challengeId

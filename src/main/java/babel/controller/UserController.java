@@ -13,7 +13,6 @@ import babel.entity.Contact;
 import babel.entity.Trophy;
 import babel.entity.User;
 import babel.repository.ContactRepository;
-import babel.repository.UserGamesRepository;
 import babel.repository.UserRepository;
 
 /**
@@ -27,9 +26,6 @@ public class UserController {
 
 		@Autowired
 		private UserRepository userRepo;
-		
-		@Autowired
-		private UserGamesRepository userGamesRepo;
 		
 		@Autowired
 		private ContactRepository contactRepo;
@@ -48,8 +44,14 @@ public class UserController {
 				User contactUser = userRepo.findByUsername(contacts.get(i).getContact());
 				result.remove(contactUser);
 			}
+		
+			/*remove current user from contact list*/
+			User me = userRepo.findByUsername(username);
+			result.remove(me);
+			
 			return result;
 		}
+		
 		/**
 		 * Return user's informations
 		 * @param 
