@@ -84,15 +84,20 @@ public class User {
 	protected String userImg;
 
 	@Transient
+	@Column(nullable = true)
 	protected float userPoints;
 	
 	@Transient
+	@Column(nullable = true)
 	protected int userGameCount;
 	
+	@Column(nullable = true)
 	protected int userChallenges;
 	
+	@Column(nullable = true)
 	protected int userVictories;
 	
+	@Column(nullable = true)
 	protected String sex;
 	
 	public String getFirstName() {
