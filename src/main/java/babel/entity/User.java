@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -192,6 +193,7 @@ public class User {
 		return (gamesPoints + trophyPoints);
 	}
 
+	@JsonIgnore
 	public void setUserPoints(float userPoints) {
 		this.userPoints = userPoints;
 	}
@@ -202,6 +204,7 @@ public class User {
 		return userGameCount;
 	}
 
+	@JsonIgnore
 	public void setUserGameCount(int userGameNumber) {
 		this.userGameCount = userGameNumber;
 	}

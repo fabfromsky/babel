@@ -1,16 +1,19 @@
 package babel_back;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import javax.transaction.Transactional;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,8 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import babel.Application;
-import babel.entity.Game;
-import babel.repository.GameRepository;
+import babel.entity.User;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,44 +31,44 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ContextConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class GameControllerTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class UserControllerTest {
 	
 	private MockMvc mockMvc;
 	
 	private ObjectMapper jsonMapper = new ObjectMapper();
 	
+	private User user = new User();
+	
 	@Autowired
 	private WebApplicationContext wac;
 	
-	@Autowired
-	private GameRepository gameRepo;
-	
-	Game game = new Game();
-
-
 	@Before
-	public void SetUp() {
-
+	public void setUp() {
+		
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 		jsonMapper.setSerializationInclusion(Include.NON_NULL);
-	
-		game.setGameTitle("gametest");
-		game.setGameDescription("description test");
-		game.setGameImg("imagetest.jpeg");
-		game.setGameName("game test");
+		
+		user.setFirstName("toto");
+		user.setLastName("titi");
+		user.setUsername("usernametest");
+		user.setMail("mail@test.com");
+		user.setPwd("1234");
+		user.setSex("M");
+		
+	}
 
+	@Test	
+	public void createUserWithGoodParameters_ShouldReturn_200() throws Exception {
+		
+		mockMvc.perform(post("/user/save")
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonMapper.writeValueAsString(user)))
+				.andDo(print())
+				.andExpect(status().isOk());		
 	}
+
 	
-	@Test
-	public void getGames_ShouldReturn_200() throws Exception {
-		gameRepo.save(game);	
-			
-		mockMvc.perform(get("/games"))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].gameTitle").value("gametest"))
-				.andExpect(jsonPath("$[0].gameDescription").value("description test"))
-				.andExpect(jsonPath("$[0].gameImg").value("imagetest.jpeg"))
-				.andExpect(jsonPath("$[0].gameName").value("game test"));
-	}
 }

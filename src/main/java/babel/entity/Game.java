@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,9 +22,10 @@ public class Game {
 	
 	public Game() {};
 	
-	public Game(String gameId, String gameName, String gameDescription, String gameImg, List<UserGames> sessions) {
+	public Game(int gameId, String gameName, String gameDescription, String gameImg, List<UserGames> sessions, String gameTitle) {
 		super();
 		this.gameId = gameId;
+		this.gameTitle = gameTitle;
 		this.gameName = gameName;
 		this.gameDescription = gameDescription;
 		this.gameImg = gameImg;
@@ -30,7 +33,10 @@ public class Game {
 	}
 
 	@Id
-	protected String gameId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	protected int gameId;
+	
+	protected String gameTitle;
 	
 	protected String gameName;
 	
@@ -42,12 +48,20 @@ public class Game {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
 	protected List<UserGames> sessions;
 
-	public String getGameId() {
+	public int getGameId() {
 		return gameId;
 	}
 
-	public void setGameId(String gameId) {
+	public void setGameId(int gameId) {
 		this.gameId = gameId;
+	}
+
+	public String getGameTitle() {
+		return gameTitle;
+	}
+
+	public void setGameTitle(String gameTitle) {
+		this.gameTitle = gameTitle;
 	}
 
 	public String getGameName() {

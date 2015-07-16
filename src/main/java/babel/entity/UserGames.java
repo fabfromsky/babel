@@ -17,7 +17,7 @@ public class UserGames {
 	
 	public UserGames(){}
 	
-	public UserGames(int userGameId, String user, String game, int score) {
+	public UserGames(int userGameId, String user, int game, int score) {
 		super();
 		this.userGameId = userGameId;
 		this.user = user;
@@ -32,7 +32,7 @@ public class UserGames {
 	
 	protected String user;
 	
-	protected String game;
+	protected int game;
 	
 	protected int score;
 
@@ -52,11 +52,11 @@ public class UserGames {
 		this.user = user;
 	}
 
-	public String getGame() {
+	public int getGame() {
 		return game;
 	}
 
-	public void setGame(String game) {
+	public void setGame(int game) {
 		this.game = game;
 	}
 
