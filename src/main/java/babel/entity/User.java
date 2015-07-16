@@ -6,12 +6,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +28,7 @@ public class User {
 			String username, String pwd, List<Trophy> trophies,
 			List<Contact> contacts, String userImg, float userPoints, 
 			int userChallenges, int userGameCount, int userVictories, 
-			List<UserGames> games, String sex) {
+			List<UserGames> games, String sex, List<Message> sentMessages, List<Message> receivedMessages) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -38,6 +38,8 @@ public class User {
 		this.trophies = trophies;
 		this.contacts = contacts;
 		this.games = games;
+		this.sentMessages = sentMessages;
+		this.receivedMessages = receivedMessages;
 		this.userImg = userImg;
 		this.userPoints = userPoints;
 		this.userChallenges = userChallenges;
@@ -68,18 +70,34 @@ public class User {
 	protected List<Trophy> trophies;
 	
 	@Column(nullable = true)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonProperty("contact")
+	@OneToMany
+	@JoinColumn(name="user", referencedColumnName="username")
+	@JsonProperty("contacts")
 	protected List<Contact> contacts;
 	
 	@Column(nullable = true)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+	@OneToMany
+	@JoinColumn(name="contact", referencedColumnName="username")
+	@JsonProperty("manageContacts")
 	protected List<Contact> manageContacts;
 	
 	@Column(nullable = true)
 	@JsonProperty("games")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany
+	@JoinColumn(name="user", referencedColumnName="username")
 	protected List<UserGames> games;
+	
+	@Column(nullable = true)
+	@JsonProperty("sentMessages")
+	@OneToMany
+	@JoinColumn(name="sender", referencedColumnName="username")
+	protected List<Message> sentMessages;
+	
+	@Column(nullable = true)
+	@JsonProperty("receivedMessages")
+	@OneToMany
+	@JoinColumn(name="receiver", referencedColumnName="username")
+	protected List<Message> receivedMessages;
 		
 	@Column(nullable = true)
 	protected String userImg;
@@ -159,6 +177,22 @@ public class User {
 		
 	}
 
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+
+	public void setSentMessages(List<Message> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+
+	public List<Message> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
+	}
+
 	public void setUserImg(String userImg) {
 		this.userImg = userImg;
 	}
@@ -193,7 +227,6 @@ public class User {
 		return (gamesPoints + trophyPoints);
 	}
 
-	@JsonIgnore
 	public void setUserPoints(float userPoints) {
 		this.userPoints = userPoints;
 	}
@@ -204,7 +237,6 @@ public class User {
 		return userGameCount;
 	}
 
-	@JsonIgnore
 	public void setUserGameCount(int userGameNumber) {
 		this.userGameCount = userGameNumber;
 	}
