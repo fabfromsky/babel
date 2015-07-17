@@ -1,14 +1,14 @@
 USE babel;
 
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg", 120, 145, "F");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg", 25, 49, "M");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", "mouillette.jpg", 2, 6, "M");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", "jobijoba.jpg", 54, 68, "F");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("quenotte", "Adam", "Labrosse", "labrosseadam@mail.com", "wlkdrjt", null, 54, 68, "M");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("popmusic", "Agathe", "Youbeb", "igotubabe@mail.com", "rhtewh", null, 54, 68, "F");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("pokerface", "Jack", "Pote", "pokerface@mail.com", "sefr54", null, 54, 68, "M");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("maguybole", "Magguy", "Bole", "maguybole@mail.com", "q5f4e5", null, 54, 68, "F");
-INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories, user_challenges, sex) VALUES("saravigote", "Sarah", "Vigote", "saravigote@mail.com", "dfg4df5", null, 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("claratatouille", "Clara", "Tatouille", "claratatouille@gmail.com", "12345", "claratatouille.jpg", 120, 145, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("mondentier", "Edmond", "Dentier", "mondentier@mail.com", "23456", "mondentier.jpg", 25, 49, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("mouillette", "John", "Doeuf", "mouillette@mail.com", "34567", "mouillette.jpg", 2, 6, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("jobijoba", "Jo", "Bijoba", "jobijoba@mail.com", "456789", "jobijoba.jpg", 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("quenotte", "Adam", "Labrosse", "labrosseadam@mail.com", "wlkdrjt", null, 54, 68, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("popmusic", "Agathe", "Youbeb", "igotubabe@mail.com", "rhtewh", null, 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("pokerface", "Jack", "Pote", "pokerface@mail.com", "sefr54", null, 54, 68, "M");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("maguybole", "Magguy", "Bole", "maguybole@mail.com", "q5f4e5", null, 54, 68, "F");
+INSERT INTO babel_user (username, first_name, last_name, mail, pwd, user_img, user_victories_count, user_challenges_count, sex) VALUES("saravigote", "Sarah", "Vigote", "saravigote@mail.com", "dfg4df5", null, 54, 68, "F");
 
 INSERT INTO babel_game (game_title, game_description, game_name, game_img) VALUES ("hangman", "Saurez-vous découvrir le mot caché avant de finir pendu?", "Le pendu", "pendu.png");
 INSERT INTO babel_game (game_title, game_description, game_name, game_img) VALUES ("jumpinsheep", "Aidez Tondu le mouton à atteindre les étoiles", "Saute, mouton!", "jumpinsheep.png");
@@ -60,12 +60,12 @@ INSERT INTO babel_user_trophies (trophy, user) VALUES ("7", "jobijoba");
 INSERT INTO babel_user_trophies (trophy, user) VALUES ("11", "jobijoba");
 INSERT INTO babel_user_trophies (trophy, user) VALUES ("16", "jobijoba");
 
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "1");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "2");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "2");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "1");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mouillette", 321, "1434029757", "claratatouille", null, "2");
-INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("jobijoba", 321, "1434029757", "claratatouille", null, "2");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "1");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("claratatouille", 321, "1434029757", "mondentier", null, "2");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "2");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("mondentier", 321, "1434029757", "claratatouille", null, "1");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("mouillette", 321, "1434029757", "claratatouille", null, "2");
+INSERT INTO babel_challenge (player_id, player_score, date, challenger_id, challenger_score, game_id) VALUES ("jobijoba", 321, "1434029757", "claratatouille", null, "2");
 
 INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1", "1434029755");
 INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2", "1434029756");

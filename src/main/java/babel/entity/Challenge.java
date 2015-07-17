@@ -15,8 +15,8 @@ public class Challenge {
 	
 	public Challenge(){};
 	
-	public Challenge(int challengeId, Game game, String player,
-			String challenger, Integer playerScore, Integer challengerScore, String date) {
+	public Challenge(int challengeId, Game game, User player,
+			User challenger, Integer playerScore, Integer challengerScore, String date) {
 		super();
 		this.challengeId = challengeId;
 		this.game = game;
@@ -35,9 +35,13 @@ public class Challenge {
 	@JoinColumn(name = "gameId")
 	protected Game game;
 	
-	protected String player;
+	@ManyToOne
+	@JoinColumn(name = "playerId")
+	protected User player;
 	
-	protected String challenger;
+	@ManyToOne
+	@JoinColumn(name = "challengerId")
+	protected User challenger;
 	
 	protected Integer playerScore;
 	
@@ -62,19 +66,19 @@ public class Challenge {
 		this.game = game;
 	}
 
-	public String getPlayer() {
+	public User getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(String player) {
+	public void setPlayer(User player) {
 		this.player = player;
 	}
 
-	public String getChallenger() {
+	public User getChallenger() {
 		return challenger;
 	}
 
-	public void setChallenger(String challenger) {
+	public void setChallenger(User challenger) {
 		this.challenger = challenger;
 	}
 

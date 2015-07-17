@@ -27,8 +27,10 @@ import org.springframework.web.context.WebApplicationContext;
 import babel.Application;
 import babel.entity.Challenge;
 import babel.entity.Game;
+import babel.entity.User;
 import babel.repository.ChallengeRepository;
 import babel.repository.GameRepository;
+import babel.repository.UserRepository;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,6 +48,8 @@ public class ChallengeControllerTest {
 
 	Challenge challenge = new Challenge();
 	Game game = new Game();
+	User player = new User();
+	User challenger = new User();
 	String username = "playertest";
 	
 	//concrete repo
@@ -54,6 +58,9 @@ public class ChallengeControllerTest {
 	
 	@Autowired
 	GameRepository gameRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -70,11 +77,26 @@ public class ChallengeControllerTest {
 		game.setGameImg("game img test");
 		game.setGameName("game test");
 		
-		gameRepo.save(game);
+		player.setFirstName("toto");
+		player.setLastName("titi");
+		player.setUsername(username);
+		player.setMail("mail@test.com");
+		player.setPwd("1234");
+		player.setSex("M");
 		
-		challenge.setChallenger("challengerTest");
+		challenger.setFirstName("tutu");
+		challenger.setLastName("tata");
+		challenger.setUsername("challengertest");
+		challenger.setMail("mail@test.com");
+		challenger.setPwd("2345");
+		challenger.setSex("M");
+		
+		gameRepo.save(game);
+		userRepo.save(player);
+		
+		challenge.setChallenger(challenger);
 		challenge.setGame(game);
-		challenge.setPlayer(username);
+		challenge.setPlayer(player);
 		challenge.setPlayerScore(41454);
 				
 	}

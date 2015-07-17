@@ -11,26 +11,30 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
 @Table(name="Babel_user")
 @JsonInclude(Include.NON_NULL)
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "username")
 public class User {
 	
 	public User(){};
 	
 	public User(String firstName, String lastName, String mail,
 			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, String userImg, float userPoints, 
-			int userChallenges, int userGameCount, int userVictories, 
-			List<UserGames> games, String sex, List<Message> sentMessages, List<Message> receivedMessages) {
+			List<Contact> contacts, List<Contact> manageContacts,
+			List<UserGames> games, List<Message> sentMessages,
+			List<Message> receivedMessages, String userImg, 
+			int userChallengesCount, int userVictoriesCount, String sex) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -39,17 +43,16 @@ public class User {
 		this.pwd = pwd;
 		this.trophies = trophies;
 		this.contacts = contacts;
+		this.manageContacts = manageContacts;
 		this.games = games;
 		this.sentMessages = sentMessages;
 		this.receivedMessages = receivedMessages;
 		this.userImg = userImg;
-		this.userPoints = userPoints;
-		this.userChallenges = userChallenges;
-		this.userGameCount = userGameCount;
-		this.userVictories = userVictories;
+		this.userChallengesCount = userChallengesCount;
+		this.userVictoriesCount = userVictoriesCount;
 		this.sex = sex;
 	}
-	
+
 	@Column(nullable = false)
 	protected String firstName;
 	
@@ -67,12 +70,29 @@ public class User {
 	protected String pwd;
 	
 	@Column(nullable = true)
+	protected String userImg;
+	
+	@Column(nullable = true)
+	protected int userChallengesCount;
+	
+	@Column(nullable = true)
+	protected int userVictoriesCount;
+	
+	@Column(nullable = true)
+	protected String sex;
+	
+	@Column(nullable = true)
 	@JsonProperty("trophies")
 	@ManyToMany
 	@JoinTable(name="babel_user_trophies", 
 		joinColumns=@JoinColumn(name="user"), 
 		inverseJoinColumns=@JoinColumn(name="trophy"))
 	protected List<Trophy> trophies;
+	
+	@Column(nullable = true)
+	@JsonProperty("games")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	protected List<UserGames> games;
 	
 	@Column(nullable = true)
 	@OneToMany
@@ -87,12 +107,6 @@ public class User {
 	protected List<Contact> manageContacts;
 	
 	@Column(nullable = true)
-	@JsonProperty("games")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonManagedReference
-	protected List<UserGames> games;
-	
-	@Column(nullable = true)
 	@JsonProperty("sentMessages")
 	@OneToMany
 	@JoinColumn(name="sender", referencedColumnName="username")
@@ -103,26 +117,16 @@ public class User {
 	@OneToMany
 	@JoinColumn(name="receiver", referencedColumnName="username")
 	protected List<Message> receivedMessages;
-		
-	@Column(nullable = true)
-	protected String userImg;
-
-	@Transient
-	@Column(nullable = true)
-	protected float userPoints;
-	
-	@Transient
-	@Column(nullable = true)
-	protected int userGameCount;
 	
 	@Column(nullable = true)
-	protected int userChallenges;
+	@JsonProperty("sentChallenges")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+	protected List<Challenge> sentChallenges;
 	
 	@Column(nullable = true)
-	protected int userVictories;
-	
-	@Column(nullable = true)
-	protected String sex;
+	@JsonProperty("receivedChallenges")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "challenger")
+	protected List<Challenge> receivedChallenges;
 	
 	public String getFirstName() {
 		return firstName;
@@ -156,6 +160,36 @@ public class User {
 		this.username = username;
 	}
 
+	public int getUserChallengesCount() {
+		return userChallengesCount;
+	}
+
+	public void setUserChallengesCount(int userChallengesCount) {
+		this.userChallengesCount = userChallengesCount;
+	}
+
+	public int getUserVictoriesCount() {
+		return userVictoriesCount;
+	}
+
+	public void setUserVictoriesCount(int userVictoriesCount) {
+		this.userVictoriesCount = userVictoriesCount;
+	}
+
+	public String getUserImg() {
+		if(userImg != null) {
+			return userImg;
+		}
+		else {
+			return this.getSex() + ".jpg";
+		}
+		
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+
 	public List<Trophy> getTrophies() {
 		return trophies;
 	}
@@ -170,16 +204,6 @@ public class User {
 
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
-	}
-
-	public String getUserImg() {
-		if(userImg != null) {
-			return userImg;
-		}
-		else {
-			return this.getSex() + ".jpg";
-		}
-		
 	}
 
 	public List<Message> getSentMessages() {
@@ -198,10 +222,6 @@ public class User {
 		this.receivedMessages = receivedMessages;
 	}
 
-	public void setUserImg(String userImg) {
-		this.userImg = userImg;
-	}
-
 	public String getPwd() {
 		return pwd;
 	}
@@ -217,51 +237,7 @@ public class User {
 	public void setGames(List<UserGames> games) {
 		this.games = games;
 	}
-
-	public float getUserPoints() {
-		float trophyPoints = 0;
-		List <Trophy> trophies = this.getTrophies();
-		for(int i=0; i<trophies.size(); i++) {
-			trophyPoints += trophies.get(i).getPoints();
-		}
-		float gamesPoints = 0;
-		List<UserGames> games = this.getGames();
-		for(int j=0; j<games.size(); j++) {
-			gamesPoints += games.get(j).getScore();
-		}
-		return (gamesPoints + trophyPoints);
-	}
-
-	public void setUserPoints(float userPoints) {
-		this.userPoints = userPoints;
-	}
-
-	public int getUserGameCount() {
-		int userGameCount = 0;
-		userGameCount = this.getGames().size();
-		return userGameCount;
-	}
-
-	public void setUserGameCount(int userGameNumber) {
-		this.userGameCount = userGameNumber;
-	}
-
-	public int getUserChallenges() {
-		return userChallenges;
-	}
-
-	public void setUserChallenges(int userChallenges) {
-		this.userChallenges = userChallenges;
-	}
-
-	public int getUserVictories() {
-		return userVictories;
-	}
-
-	public void setUserVictories(int userVictories) {
-		this.userVictories = userVictories;
-	}
-
+	
 	public List<Contact> getManageContacts() {
 		return manageContacts;
 	}
@@ -276,6 +252,27 @@ public class User {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	
+
+	public float getPoints() {
+		float trophyPoints = 0;
+		List <Trophy> trophies = this.getTrophies();
+		for(int i=0; i<trophies.size(); i++) {
+			trophyPoints += trophies.get(i).getPoints();
+		}
+		float gamesPoints = 0;
+		List<UserGames> games = this.getGames();
+		for(int j=0; j<games.size(); j++) {
+			gamesPoints += games.get(j).getScore();
+		}
+		return (gamesPoints + trophyPoints);
+	}
+
+	public int getGamesCount() {
+		int userGamesCount = 0;
+		userGamesCount = this.getGames().size();
+		return userGamesCount;
 	}
 	
 }
