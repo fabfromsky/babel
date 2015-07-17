@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -66,7 +68,10 @@ public class User {
 	
 	@Column(nullable = true)
 	@JsonProperty("trophies")
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userTrophy")
+	@ManyToMany
+	@JoinTable(name="babel_user_trophies", 
+		joinColumns=@JoinColumn(name="user"), 
+		inverseJoinColumns=@JoinColumn(name="trophy"))
 	protected List<Trophy> trophies;
 	
 	@Column(nullable = true)
@@ -83,8 +88,8 @@ public class User {
 	
 	@Column(nullable = true)
 	@JsonProperty("games")
-	@OneToMany
-	@JoinColumn(name="user", referencedColumnName="username")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonManagedReference
 	protected List<UserGames> games;
 	
 	@Column(nullable = true)

@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -17,7 +20,7 @@ public class UserGames {
 	
 	public UserGames(){}
 	
-	public UserGames(int userGameId, String user, int game, int score) {
+	public UserGames(int userGameId, User user, Game game, int score) {
 		super();
 		this.userGameId = userGameId;
 		this.user = user;
@@ -30,9 +33,14 @@ public class UserGames {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int userGameId;
 	
-	protected String user;
+	@ManyToOne
+	@JoinColumn(name="username")
+	@JsonBackReference
+	protected User user;
 	
-	protected int game;
+	@ManyToOne
+	@JoinColumn(name = "game")
+	protected Game game;
 	
 	protected int score;
 
@@ -44,19 +52,19 @@ public class UserGames {
 		this.userGameId = userGameId;
 	}
 
-	public String getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public int getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(int game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 

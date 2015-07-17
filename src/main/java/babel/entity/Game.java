@@ -1,16 +1,11 @@
 package babel.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -22,14 +17,13 @@ public class Game {
 	
 	public Game() {};
 	
-	public Game(int gameId, String gameName, String gameDescription, String gameImg, List<UserGames> sessions, String gameTitle) {
+	public Game(int gameId, String gameName, String gameDescription, String gameImg, String gameTitle) {
 		super();
 		this.gameId = gameId;
 		this.gameTitle = gameTitle;
 		this.gameName = gameName;
 		this.gameDescription = gameDescription;
 		this.gameImg = gameImg;
-		this.sessions = sessions;
 	}
 
 	@Id
@@ -43,11 +37,6 @@ public class Game {
 	protected String gameDescription;
 	
 	protected String gameImg;
-	
-	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="game", referencedColumnName="gameId")
-	protected List<UserGames> sessions;
 
 	public int getGameId() {
 		return gameId;
@@ -87,14 +76,6 @@ public class Game {
 
 	public void setGameImg(String gameImg) {
 		this.gameImg = gameImg;
-	}
-
-	public List<UserGames> getSessions() {
-		return sessions;
-	}
-
-	public void setSessions(List<UserGames> sessions) {
-		this.sessions = sessions;
 	}
 	
 }
