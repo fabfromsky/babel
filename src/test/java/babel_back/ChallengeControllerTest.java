@@ -48,8 +48,6 @@ public class ChallengeControllerTest {
 
 	Challenge challenge = new Challenge();
 	Game game = new Game();
-	User player = new User();
-	User challenger = new User();
 	String username = "playertest";
 	
 	//concrete repo
@@ -58,9 +56,6 @@ public class ChallengeControllerTest {
 	
 	@Autowired
 	GameRepository gameRepo;
-	
-	@Autowired
-	UserRepository userRepo;
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -77,26 +72,11 @@ public class ChallengeControllerTest {
 		game.setGameImg("game img test");
 		game.setGameName("game test");
 		
-		player.setFirstName("toto");
-		player.setLastName("titi");
-		player.setUsername(username);
-		player.setMail("mail@test.com");
-		player.setPwd("1234");
-		player.setSex("M");
-		
-		challenger.setFirstName("tutu");
-		challenger.setLastName("tata");
-		challenger.setUsername("challengertest");
-		challenger.setMail("mail@test.com");
-		challenger.setPwd("2345");
-		challenger.setSex("M");
-		
 		gameRepo.save(game);
-		userRepo.save(player);
 		
-		challenge.setChallenger(challenger);
+		challenge.setChallenger("challengertest");
 		challenge.setGame(game);
-		challenge.setPlayer(player);
+		challenge.setPlayer(username);
 		challenge.setPlayerScore(41454);
 				
 	}

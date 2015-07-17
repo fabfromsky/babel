@@ -118,16 +118,6 @@ public class User {
 	@JoinColumn(name="receiver", referencedColumnName="username")
 	protected List<Message> receivedMessages;
 	
-	@Column(nullable = true)
-	@JsonProperty("sentChallenges")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
-	protected List<Challenge> sentChallenges;
-	
-	@Column(nullable = true)
-	@JsonProperty("receivedChallenges")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "challenger")
-	protected List<Challenge> receivedChallenges;
-	
 	public String getFirstName() {
 		return firstName;
 	}
