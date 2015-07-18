@@ -20,12 +20,11 @@ public class Message {
 		public Message() {};
 		
 		public Message(int messageId, User sender, User receiver,
-				String title, String content, String date) {
+				String content, String date) {
 			super();
 			this.messageId = messageId;
 			this.sender = sender;
 			this.receiver = receiver;
-			this.title = title;
 			this.content = content;
 			this.date = date;
 		}
@@ -43,8 +42,6 @@ public class Message {
 		@JoinColumn(name = "receiver")
 		@JsonBackReference(value = "receiver")
 		protected User receiver;
-		
-		protected String title;
 		
 		protected String content;
 		
@@ -72,14 +69,6 @@ public class Message {
 
 		public void setReceiver(User receiver) {
 			this.receiver = receiver;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
 		}
 
 		public String getContent() {
