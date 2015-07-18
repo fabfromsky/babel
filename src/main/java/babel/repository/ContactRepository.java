@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import babel.entity.Contact;
+import babel.entity.User;
 
 public interface ContactRepository extends JpaRepository<Contact, Long>{
 
-	List<Contact> findByContact(String username);
+	List<Contact> findByContact(User user);
 
-	List<Contact> findByUser(String username);
+	List<Contact> findByUser(User user);
 	
 }

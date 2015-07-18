@@ -33,24 +33,25 @@ public class ContactController {
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	protected Set<User> findContactByManagedContact(@Param(value = "username") String username) {
 		/*find contacts where user is "contact"*/
-		List<Contact> contacts = contactRepo.findByContact(username);
+		User user = userRepo.findByUsername(username);
+		List<Contact> contacts = contactRepo.findByContact(user);
 		
 		/*Get users linked to contacts*/
 		Set<User> users = new HashSet<User>();
 		for(int i=0; i<contacts.size(); i++) {
-			String userUsername = contacts.get(i).getUser();	
-			User user = userRepo.findByUsername(userUsername);
-			users.add(user);
+			String userUsername = contacts.get(i).getUserName();	
+			User contact = userRepo.findByUsername(userUsername);
+			users.add(contact);
 		}
 		
 		/*find contacts where user is "user"*/
-		List<Contact> myContacts = contactRepo.findByUser(username);
+		List<Contact> myContacts = contactRepo.findByUser(user);
 		
 		/*remove from users list, users i already added*/
 		for(int i=0; i<myContacts.size(); i++) {
-			String contactUsername = myContacts.get(i).getContact();	
-			User user2 = userRepo.findByUsername(contactUsername);
-			users.remove(user2);
+			String contactUsername = myContacts.get(i).getContactName();	
+			User addedContact = userRepo.findByUsername(contactUsername);
+			users.remove(addedContact);
 		}
 		
 		return users;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import babel.entity.Challenge;
+import babel.entity.User;
 import babel.repository.ChallengeRepository;
 import babel.repository.UserRepository;
 
@@ -27,7 +28,7 @@ public class ChallengeController {
 	
 	@Autowired
 	private UserRepository userRepo;
-	
+		
 	/**
 	 * find challenge by challengeId
 	 * @param challengeid
@@ -45,7 +46,8 @@ public class ChallengeController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = {"username"})
 	public List<Challenge> getChallengesByUsername(@RequestParam(value ="username", required = true) String username){
-		return challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(username, username);
+		User user = userRepo.findByUsername(username);
+		return challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(user, user);
 	}
 	
 	/**

@@ -9,14 +9,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="babel_challenge")
 public class Challenge {
 	
 	public Challenge(){};
 	
-	public Challenge(int challengeId, Game game, String player,
-			String challenger, Integer playerScore, Integer challengerScore, String date) {
+	public Challenge(int challengeId, Game game, User player,
+			User challenger, Integer playerScore, Integer challengerScore, String date) {
 		super();
 		this.challengeId = challengeId;
 		this.game = game;
@@ -35,9 +37,15 @@ public class Challenge {
 	@JoinColumn(name = "gameId")
 	protected Game game;
 	
-	protected String player;
-	
-	protected String challenger;
+	@ManyToOne
+	@JoinColumn(name = "player")
+	@JsonBackReference(value = "player")
+	protected User player;
+
+	@ManyToOne
+	@JoinColumn(name = "challenger")
+	@JsonBackReference(value = "challenger")
+	protected User challenger;
 	
 	protected Integer playerScore;
 	
@@ -62,19 +70,19 @@ public class Challenge {
 		this.game = game;
 	}
 
-	public String getPlayer() {
+	public User getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(String player) {
+	public void setPlayer(User player) {
 		this.player = player;
 	}
 
-	public String getChallenger() {
+	public User getChallenger() {
 		return challenger;
 	}
 
-	public void setChallenger(String challenger) {
+	public void setChallenger(User challenger) {
 		this.challenger = challenger;
 	}
 
@@ -102,4 +110,11 @@ public class Challenge {
 		this.date = date;
 	}
 	
+	public String getPlayerName() {
+		return player.getUsername();
+	}
+	
+	public String getChallengerName() {
+		return challenger.getUsername();
+	}
 }

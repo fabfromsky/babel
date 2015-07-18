@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -29,28 +30,28 @@ public class User {
 	
 	public User(){};
 	
-	public User(String firstName, String lastName, String mail,
-			String username, String pwd, List<Trophy> trophies,
-			List<Contact> contacts, List<Contact> manageContacts,
-			List<UserGames> games, List<Message> sentMessages,
-			List<Message> receivedMessages, String userImg, 
-			int userChallengesCount, int userVictoriesCount, String sex) {
+	public User(String firstName, String lastName, String mail, String username, String pwd, String userImg,
+			int userChallengesCount, int userVictoriesCount, String sex, List<Trophy> trophies, List<UserGames> games,
+			List<Contact> contacts, List<Contact> manageContacts, List<Message> sentMessages,
+			List<Message> receivedMessages, List<Challenge> sentChallenges, List<Challenge> receivedChallenges) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mail = mail;
 		this.username = username;
 		this.pwd = pwd;
-		this.trophies = trophies;
-		this.contacts = contacts;
-		this.manageContacts = manageContacts;
-		this.games = games;
-		this.sentMessages = sentMessages;
-		this.receivedMessages = receivedMessages;
 		this.userImg = userImg;
 		this.userChallengesCount = userChallengesCount;
 		this.userVictoriesCount = userVictoriesCount;
 		this.sex = sex;
+		this.trophies = trophies;
+		this.games = games;
+		this.contacts = contacts;
+		this.manageContacts = manageContacts;
+		this.sentMessages = sentMessages;
+		this.receivedMessages = receivedMessages;
+		this.sentChallenges = sentChallenges;
+		this.receivedChallenges = receivedChallenges;
 	}
 
 	@Column(nullable = false)
@@ -95,28 +96,40 @@ public class User {
 	protected List<UserGames> games;
 	
 	@Column(nullable = true)
-	@OneToMany
-	@JoinColumn(name="user", referencedColumnName="username")
+	@OneToMany(mappedBy = "user")
 	@JsonProperty("contacts")
+	@JsonManagedReference(value = "contact")
 	protected List<Contact> contacts;
 	
 	@Column(nullable = true)
-	@OneToMany
-	@JoinColumn(name="contact", referencedColumnName="username")
+	@OneToMany(mappedBy = "contact")
 	@JsonProperty("manageContacts")
+	@JsonManagedReference(value = "manageContact")
 	protected List<Contact> manageContacts;
 	
 	@Column(nullable = true)
 	@JsonProperty("sentMessages")
-	@OneToMany
-	@JoinColumn(name="sender", referencedColumnName="username")
+	@OneToMany(mappedBy = "sender")
+	@JsonManagedReference(value = "sender")
 	protected List<Message> sentMessages;
 	
 	@Column(nullable = true)
 	@JsonProperty("receivedMessages")
-	@OneToMany
-	@JoinColumn(name="receiver", referencedColumnName="username")
+	@OneToMany(mappedBy = "receiver")
+	@JsonManagedReference(value = "receiver")
 	protected List<Message> receivedMessages;
+	
+	@Column(nullable = true)
+	@JsonProperty("sentChallenges")
+	@OneToMany(mappedBy = "player")
+	@JsonManagedReference(value = "player")
+	protected List<Challenge> sentChallenges;
+	
+	@Column(nullable = true)
+	@JsonProperty("receivedChallenges")
+	@OneToMany(mappedBy = "challenger")
+	@JsonManagedReference(value = "challenger")
+	protected List<Challenge> receivedChallenges;
 	
 	public String getFirstName() {
 		return firstName;
@@ -242,8 +255,23 @@ public class User {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}	
+
+	public List<Challenge> getSentChallenges() {
+		return sentChallenges;
 	}
-	
+
+	public void setSentChallenges(List<Challenge> sentChallenges) {
+		this.sentChallenges = sentChallenges;
+	}
+
+	public List<Challenge> getReceivedChallenges() {
+		return receivedChallenges;
+	}
+
+	public void setReceivedChallenges(List<Challenge> receivedChallenges) {
+		this.receivedChallenges = receivedChallenges;
+	}
 
 	public float getPoints() {
 		float trophyPoints = 0;

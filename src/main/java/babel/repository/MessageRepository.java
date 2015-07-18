@@ -5,15 +5,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import babel.entity.Message;
+import babel.entity.User;
 
 public interface MessageRepository extends JpaRepository<Message, Long>{
 	
 	public List<Message> findAll();
 
-	public List<Message> findBySender(String sender);
+	public List<Message> findBySender(User sender);
 	
-	public List<Message> findByReceiver(String receiver);
+	public List<Message> findByReceiver(User receiver);
 
 	public List<Message> findByReceiverOrSenderOrderByMessageIdDesc(
-			String username, String username2);
+			User user, User user2);
 }

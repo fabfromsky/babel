@@ -38,16 +38,18 @@ public class UserController {
 		@RequestMapping(value="/search", method = RequestMethod.GET, params = {"search", "username"})
 		public List<User> getAllUsers(@RequestParam(value = "search") String search, @RequestParam(value = "username") String username){
 			List<User> result = userRepo.searchByUsernameLike(search);
-			List<Contact> contacts = contactRepo.findByUser(username);
-			/*remove contacts already addded*/
+			User user = userRepo.findByUsername(username);
+			
+			
+			List<Contact> contacts = contactRepo.findByUser(user);
+			/*remove contacts already added*/
 			for(int i=0; i<contacts.size(); i++) {
-				User contactUser = userRepo.findByUsername(contacts.get(i).getContact());
+				User contactUser = userRepo.findByUsername(contacts.get(i).getContact().getUsername());
 				result.remove(contactUser);
 			}
 		
 			/*remove current user from contact list*/
-			User me = userRepo.findByUsername(username);
-			result.remove(me);
+			result.remove(user);
 			
 			return result;
 		}

@@ -24,16 +24,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import babel.Application;
 import babel.entity.Challenge;
 import babel.entity.Game;
-import babel.entity.User;
 import babel.repository.ChallengeRepository;
 import babel.repository.GameRepository;
-import babel.repository.UserRepository;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
@@ -74,9 +72,9 @@ public class ChallengeControllerTest {
 		
 		gameRepo.save(game);
 		
-		challenge.setChallenger("challengertest");
+//		challenge.setChallenger("challengertest");
 		challenge.setGame(game);
-		challenge.setPlayer(username);
+//		challenge.setPlayer(username);
 		challenge.setPlayerScore(41454);
 				
 	}
