@@ -67,11 +67,11 @@ INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_
 INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("mouillette", 321, "1434029757", "claratatouille", null, "2");
 INSERT INTO babel_challenge (player, player_score, date, challenger, challenger_score, game_id) VALUES ("jobijoba", 321, "1434029757", "claratatouille", null, "2");
 
-INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "message 1", "1434029755");
-INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "message 2", "1434029756");
-INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "jobijoba", "claratatouille", "message 3", "1434029759");
-INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "message 4", "1434029768");
-INSERT INTO babel_message (content, sender, receiver, title, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "message 5", "1434029775");
+INSERT INTO babel_message (content, sender, receiver, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "claratatouille", "mondentier", "1434029755");
+INSERT INTO babel_message (content, sender, receiver, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "claratatouille", "1434029756");
+INSERT INTO babel_message (content, sender, receiver, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "jobijoba", "claratatouille", "1434029759");
+INSERT INTO babel_message (content, sender, receiver, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mondentier", "jobijoba", "1434029768");
+INSERT INTO babel_message (content, sender, receiver, date) VALUES ("Lorem ipsum dolor sit amet consectetur...", "mouillette", "claratatouille", "1434029775");
 
 INSERT INTO babel_contact (user, contact) VALUES ("claratatouille", "mouillette");
 INSERT INTO babel_contact (user, contact) VALUES ("claratatouille", "mondentier");

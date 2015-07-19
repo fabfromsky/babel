@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,7 +34,7 @@ public class User {
 	public User(String firstName, String lastName, String mail, String username, String pwd, String userImg,
 			int userChallengesCount, int userVictoriesCount, String sex, List<Trophy> trophies, List<UserGames> games,
 			List<Contact> contacts, List<Contact> manageContacts, List<Message> sentMessages,
-			List<Message> receivedMessages, List<Challenge> sentChallenges, List<Challenge> receivedChallenges) {
+			List<Message> receivedMessages, List<Challenge> sentChallenges, List<Challenge> receivedChallenges, int gamesCount, float points) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -52,6 +53,8 @@ public class User {
 		this.receivedMessages = receivedMessages;
 		this.sentChallenges = sentChallenges;
 		this.receivedChallenges = receivedChallenges;
+		this.points = points;
+		this.gamesCount = gamesCount;
 	}
 
 	@Column(nullable = false)
@@ -81,6 +84,12 @@ public class User {
 	
 	@Column(nullable = true)
 	protected String sex;
+	
+	@Transient
+	protected float points;
+	
+	@Transient
+	protected int gamesCount;
 	
 	@Column(nullable = true)
 	@JsonProperty("trophies")
@@ -274,23 +283,19 @@ public class User {
 	}
 
 	public float getPoints() {
-		float trophyPoints = 0;
-		List <Trophy> trophies = this.getTrophies();
-		for(int i=0; i<trophies.size(); i++) {
-			trophyPoints += trophies.get(i).getPoints();
-		}
-		float gamesPoints = 0;
-		List<UserGames> games = this.getGames();
-		for(int j=0; j<games.size(); j++) {
-			gamesPoints += games.get(j).getScore();
-		}
-		return (gamesPoints + trophyPoints);
+		return points;
+	}
+
+	public void setPoints(float points) {
+		this.points = points;
 	}
 
 	public int getGamesCount() {
-		int userGamesCount = 0;
-		userGamesCount = this.getGames().size();
-		return userGamesCount;
+		return gamesCount;
+	}
+
+	public void setGamesCount(int gamesCount) {
+		this.gamesCount = gamesCount;
 	}
 	
 }

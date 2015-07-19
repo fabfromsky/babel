@@ -36,7 +36,11 @@ public class ChallengeController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = {"challengeid"})
 	public Challenge getChallengeByChallengeId(@RequestParam(value = "challengeid", required = true) int challengeid) {
-		return challengeRepo.findByChallengeId(challengeid);
+		Challenge challenge = challengeRepo.findByChallengeId(challengeid);
+		challenge.setPlayerName(challenge.getPlayer().getUsername());
+		challenge.setChallengerName(challenge.getChallenger().getUsername());
+		
+		return challenge;
 	}
 
 	/**
@@ -47,7 +51,14 @@ public class ChallengeController {
 	@RequestMapping(method = RequestMethod.GET, params = {"username"})
 	public List<Challenge> getChallengesByUsername(@RequestParam(value ="username", required = true) String username){
 		User user = userRepo.findByUsername(username);
-		return challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(user, user);
+		List<Challenge> challenges = challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(user, user);
+		
+		for(int i=0; i<challenges.size(); i++) {
+			challenges.get(i).setPlayerName(challenges.get(i).getPlayer().getUsername());
+			challenges.get(i).setChallengerName(challenges.get(i).getChallenger().getUsername());
+		}
+	
+		return challenges;
 	}
 	
 	/**

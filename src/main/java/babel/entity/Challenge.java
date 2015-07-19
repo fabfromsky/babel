@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,7 +19,8 @@ public class Challenge {
 	public Challenge(){};
 	
 	public Challenge(int challengeId, Game game, User player,
-			User challenger, Integer playerScore, Integer challengerScore, String date) {
+			User challenger, int playerScore, Integer challengerScore, 
+			String date, String challengerName, String playerName) {
 		super();
 		this.challengeId = challengeId;
 		this.game = game;
@@ -27,6 +29,8 @@ public class Challenge {
 		this.playerScore = playerScore;
 		this.challengerScore = challengerScore;
 		this.date = date;
+		this.playerName = playerName;
+		this.challengerName = challengerName;
 	}
 
 	@Id
@@ -47,13 +51,19 @@ public class Challenge {
 	@JsonBackReference(value = "challenger")
 	protected User challenger;
 	
-	protected Integer playerScore;
+	protected int playerScore;
 	
 	@Column(nullable = true)
 	protected Integer challengerScore;
 	
 	protected String date;
-
+	
+	@Transient
+	protected String playerName;
+	
+	@Transient
+	protected String challengerName;
+	
 	public int getChallengeId() {
 		return challengeId;
 	}
@@ -109,12 +119,20 @@ public class Challenge {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public void setChallengerName(String challengerName) {
+		this.challengerName = challengerName;
+	}
+
 	public String getPlayerName() {
-		return player.getUsername();
+		return playerName;
 	}
 	
 	public String getChallengerName() {
-		return challenger.getUsername();
+		return challengerName;
 	}
 }

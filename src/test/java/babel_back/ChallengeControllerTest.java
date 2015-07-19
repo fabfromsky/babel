@@ -30,8 +30,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import babel.Application;
 import babel.entity.Challenge;
 import babel.entity.Game;
+import babel.entity.User;
 import babel.repository.ChallengeRepository;
 import babel.repository.GameRepository;
+import babel.repository.UserRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
@@ -46,7 +48,9 @@ public class ChallengeControllerTest {
 
 	Challenge challenge = new Challenge();
 	Game game = new Game();
-	String username = "playertest";
+	User player = new User();
+	User challenger = new User();
+	String username = "playerUsername";
 	
 	//concrete repo
 	@Autowired
@@ -54,6 +58,9 @@ public class ChallengeControllerTest {
 	
 	@Autowired
 	GameRepository gameRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -72,9 +79,27 @@ public class ChallengeControllerTest {
 		
 		gameRepo.save(game);
 		
-//		challenge.setChallenger("challengertest");
+		player.setFirstName("playerFirstname");
+		player.setLastName("playerLastname");
+		player.setMail("playerMail");
+		player.setPwd("12345");
+		player.setSex("M");
+		player.setUsername(username);
+		
+		userRepo.save(player);
+		
+		challenger.setFirstName("challengerFristname");
+		challenger.setLastName("challengerLastname");
+		challenger.setMail("challengerMail");
+		challenger.setPwd("12345");
+		challenger.setSex("M");
+		challenger.setUsername("challengerUsername");
+		
+		userRepo.save(challenger);
+		
+		challenge.setChallenger(challenger);
 		challenge.setGame(game);
-//		challenge.setPlayer(username);
+		challenge.setPlayer(player);
 		challenge.setPlayerScore(41454);
 				
 	}
@@ -109,45 +134,9 @@ public class ChallengeControllerTest {
 			.accept(MediaType.APPLICATION_JSON))
 			.andDo(print())
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$[0].player").value("playertest"))
+			.andExpect(jsonPath("$[0].playerName").value("playerUsername"))
 			.andExpect(jsonPath("$[0].playerScore").value(41454))
-			.andExpect(jsonPath("$[0].challenger").value("challengerTest"))
+			.andExpect(jsonPath("$[0].challengerName").value("challengerUsername"))
 			.andExpect(jsonPath("$[0].challengerScore").value(IsNull.nullValue()));
-	}
-	
-	@Test
-	public void test_4_answerChallenge_ShouldUpdateChallegeAndReturn_200() throws Exception {
-						
-		mockMvc.perform(post("/challenges/new")
-				.accept(MediaType.APPLICATION_JSON)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(jsonMapper.writeValueAsString(challenge)))
-				.andDo(print())
-				.andExpect(status().isOk());
-		
-		mockMvc.perform(get("/challenges?challengeid=3")
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.player").value("playertest"))
-				.andExpect(jsonPath("$.playerScore").value(41454))
-				.andExpect(jsonPath("$.challenger").value("challengerTest"))
-				.andExpect(jsonPath("$.challengerScore").value(IsNull.nullValue()));
-		
-		challenge.setChallengeId(3);
-		challenge.setChallengerScore(14575);
-		
-		mockMvc.perform(post("/challenges/new")
-				.accept(MediaType.APPLICATION_JSON)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(jsonMapper.writeValueAsString(challenge)))
-				.andDo(print())
-				.andExpect(status().isOk());
-		
-		mockMvc.perform(get("/challenges?challengeid=3")
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.challengerScore").value(14575));
 	}
 }
