@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -14,7 +17,7 @@ public class Contact {
 
 		public Contact(){};
 		
-		public Contact(int contactId, String user, String contact) {
+		public Contact(int contactId, User user, User contact) {
 			super();
 			this.contactId = contactId;
 			this.user = user;
@@ -26,9 +29,16 @@ public class Contact {
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		protected int contactId;
 		
-		protected String user;
+		@ManyToOne
+		@JoinColumn(name = "user")
+		@JsonBackReference(value = "contact")
+		protected User user;
 		
-		protected String contact;
+
+		@ManyToOne
+		@JoinColumn(name = "contact")
+		@JsonBackReference(value = "manageContact")
+		protected User contact;
 
 		public int getContactId() {
 			return contactId;
@@ -38,20 +48,28 @@ public class Contact {
 			this.contactId = contactId;
 		}
 
-		public String getUser() {
+		public User getUser() {
 			return user;
 		}
 
-		public void setUser(String user) {
+		public void setUser(User user) {
 			this.user = user;
 		}
 
-		public String getContact() {
+		public User getContact() {
 			return contact;
 		}
 
-		public void setContact(String contact) {
+		public void setContact(User contact) {
 			this.contact = contact;
 		}	
+		
+		public String getUserName(){
+			return user.getUsername();
+		}
+		
+		public String getContactName(){
+			return contact.getUsername();
+		}
 		
 }

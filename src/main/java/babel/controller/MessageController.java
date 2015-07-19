@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import babel.entity.Message;
+import babel.entity.User;
 import babel.repository.MessageRepository;
+import babel.repository.UserRepository;
 
 /**
  * 
@@ -22,6 +24,9 @@ public class MessageController {
 	
 	@Autowired
 	private MessageRepository messageRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 		
 	/**
 	 * find messages by [username]
@@ -30,8 +35,8 @@ public class MessageController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = "username")
 	public List<Message> getMessagesByUsername(@RequestParam(value = "username", required = true) String username) {
-		
-		return messageRepo.findByReceiverOrSenderOrderByMessageIdDesc(username, username);
+		User user = userRepo.findByUsername(username);
+		return messageRepo.findByReceiverOrSenderOrderByMessageIdDesc(user, user);
 	}
 	
 	/**

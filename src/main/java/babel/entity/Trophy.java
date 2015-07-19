@@ -1,17 +1,11 @@
 package babel.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -22,12 +16,11 @@ public class Trophy {
 
 	public Trophy(){};
 
-	public Trophy(int trophyId, List<User> userTrophy, String trophyName,
+	public Trophy(int trophyId, String trophyName,
 			int points, String description, String trophyCategory, String trophyTitle) {
 		super();
 		this.trophyId = trophyId;
 		this.trophyTitle = trophyTitle;
-		this.userTrophy = userTrophy;
 		this.trophyName = trophyName;
 		this.points = points;
 		this.description = description;
@@ -44,13 +37,6 @@ public class Trophy {
 	
 	protected String trophyCategory;
 	
-	@JsonBackReference
-	@ManyToMany()
-	@JoinTable(name="babel_user_trophies",
-		joinColumns = @JoinColumn(name="trophyId"),
-		inverseJoinColumns = @JoinColumn(name="username"))
-	protected List<User> userTrophy;
-	
 	protected int points;
 	
 	protected String description;
@@ -61,14 +47,6 @@ public class Trophy {
 
 	public void setTrophyId(int trophyId) {
 		this.trophyId = trophyId;
-	}
-
-	public List<User> getUserTrophy() {
-		return userTrophy;
-	}
-
-	public void setUserTrophy(List<User> userTrophy) {
-		this.userTrophy = userTrophy;
 	}
 
 	public String getTrophyName() {

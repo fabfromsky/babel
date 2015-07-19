@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="babel_challenge")
@@ -15,8 +18,9 @@ public class Challenge {
 	
 	public Challenge(){};
 	
-	public Challenge(int challengeId, Game game, String player,
-			String challenger, Integer playerScore, Integer challengerScore, String date) {
+	public Challenge(int challengeId, Game game, User player,
+			User challenger, int playerScore, Integer challengerScore, 
+			String date, String challengerName, String playerName) {
 		super();
 		this.challengeId = challengeId;
 		this.game = game;
@@ -25,6 +29,8 @@ public class Challenge {
 		this.playerScore = playerScore;
 		this.challengerScore = challengerScore;
 		this.date = date;
+		this.playerName = playerName;
+		this.challengerName = challengerName;
 	}
 
 	@Id
@@ -35,17 +41,29 @@ public class Challenge {
 	@JoinColumn(name = "gameId")
 	protected Game game;
 	
-	protected String player;
+	@ManyToOne
+	@JoinColumn(name = "player")
+	@JsonBackReference(value = "player")
+	protected User player;
+
+	@ManyToOne
+	@JoinColumn(name = "challenger")
+	@JsonBackReference(value = "challenger")
+	protected User challenger;
 	
-	protected String challenger;
-	
-	protected Integer playerScore;
+	protected int playerScore;
 	
 	@Column(nullable = true)
 	protected Integer challengerScore;
 	
 	protected String date;
-
+	
+	@Transient
+	protected String playerName;
+	
+	@Transient
+	protected String challengerName;
+	
 	public int getChallengeId() {
 		return challengeId;
 	}
@@ -62,19 +80,19 @@ public class Challenge {
 		this.game = game;
 	}
 
-	public String getPlayer() {
+	public User getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(String player) {
+	public void setPlayer(User player) {
 		this.player = player;
 	}
 
-	public String getChallenger() {
+	public User getChallenger() {
 		return challenger;
 	}
 
-	public void setChallenger(String challenger) {
+	public void setChallenger(User challenger) {
 		this.challenger = challenger;
 	}
 
@@ -101,5 +119,20 @@ public class Challenge {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public void setChallengerName(String challengerName) {
+		this.challengerName = challengerName;
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
 	
+	public String getChallengerName() {
+		return challengerName;
+	}
 }

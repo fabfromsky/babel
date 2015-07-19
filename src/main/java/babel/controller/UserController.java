@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import babel.entity.Contact;
 import babel.entity.Trophy;
 import babel.entity.User;
+import babel.entity.UserGames;
 import babel.repository.ContactRepository;
 import babel.repository.UserRepository;
 
@@ -38,16 +39,18 @@ public class UserController {
 		@RequestMapping(value="/search", method = RequestMethod.GET, params = {"search", "username"})
 		public List<User> getAllUsers(@RequestParam(value = "search") String search, @RequestParam(value = "username") String username){
 			List<User> result = userRepo.searchByUsernameLike(search);
-			List<Contact> contacts = contactRepo.findByUser(username);
-			/*remove contacts already addded*/
+			User user = userRepo.findByUsername(username);
+			
+			
+			List<Contact> contacts = contactRepo.findByUser(user);
+			/*remove contacts already added*/
 			for(int i=0; i<contacts.size(); i++) {
-				User contactUser = userRepo.findByUsername(contacts.get(i).getContact());
+				User contactUser = userRepo.findByUsername(contacts.get(i).getContact().getUsername());
 				result.remove(contactUser);
 			}
 		
 			/*remove current user from contact list*/
-			User me = userRepo.findByUsername(username);
-			result.remove(me);
+			result.remove(user);
 			
 			return result;
 		}
@@ -59,7 +62,26 @@ public class UserController {
 		 */
 		@RequestMapping(method = RequestMethod.GET, params = {"username"})
 		public User getUserByUsername(@RequestParam(value = "username", required = true) String username) {
-			return userRepo.findByUsername(username);
+			User user = userRepo.findByUsername(username);
+			float trophyPoints = 0;
+			List <Trophy> trophies = user.getTrophies();
+			for(int i=0; i<trophies.size(); i++) {
+				trophyPoints += trophies.get(i).getPoints();
+			}
+			float gamesPoints = 0;
+			List<UserGames> games = user.getGames();
+			for(int j=0; j<games.size(); j++) {
+				gamesPoints += games.get(j).getScore();
+			}
+			
+			user.setPoints(trophyPoints + gamesPoints);
+			
+			int userGamesCount = 0;
+			userGamesCount = user.getGames().size();
+			
+			user.setGamesCount(userGamesCount);
+			
+			return user;
 		}
 		
 		/**

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import babel.entity.Challenge;
+import babel.entity.User;
 import babel.repository.ChallengeRepository;
+import babel.repository.UserRepository;
 
 /**
  * 
@@ -24,6 +26,9 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeRepository challengeRepo;
 	
+	@Autowired
+	private UserRepository userRepo;
+		
 	/**
 	 * find challenge by challengeId
 	 * @param challengeid
@@ -31,7 +36,11 @@ public class ChallengeController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = {"challengeid"})
 	public Challenge getChallengeByChallengeId(@RequestParam(value = "challengeid", required = true) int challengeid) {
-		return challengeRepo.findByChallengeId(challengeid);
+		Challenge challenge = challengeRepo.findByChallengeId(challengeid);
+		challenge.setPlayerName(challenge.getPlayer().getUsername());
+		challenge.setChallengerName(challenge.getChallenger().getUsername());
+		
+		return challenge;
 	}
 
 	/**
@@ -41,7 +50,15 @@ public class ChallengeController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = {"username"})
 	public List<Challenge> getChallengesByUsername(@RequestParam(value ="username", required = true) String username){
-		return challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(username, username);
+		User user = userRepo.findByUsername(username);
+		List<Challenge> challenges = challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(user, user);
+		
+		for(int i=0; i<challenges.size(); i++) {
+			challenges.get(i).setPlayerName(challenges.get(i).getPlayer().getUsername());
+			challenges.get(i).setChallengerName(challenges.get(i).getChallenger().getUsername());
+		}
+	
+		return challenges;
 	}
 	
 	/**
