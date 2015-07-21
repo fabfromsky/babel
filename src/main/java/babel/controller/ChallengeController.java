@@ -51,7 +51,7 @@ public class ChallengeController {
 	@RequestMapping(method = RequestMethod.GET, params = {"username"})
 	public List<Challenge> getChallengesByUsername(@RequestParam(value ="username", required = true) String username){
 		User user = userRepo.findByUsername(username);
-		List<Challenge> challenges = challengeRepo.findByChallengerOrPlayerOrderByChallengeIdDesc(user, user);
+		List<Challenge> challenges = challengeRepo.findByChallengerOrPlayerOrderByDateDesc(user, user);
 		
 		for(int i=0; i<challenges.size(); i++) {
 			challenges.get(i).setPlayerName(challenges.get(i).getPlayer().getUsername());

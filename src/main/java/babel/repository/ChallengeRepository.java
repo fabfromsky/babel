@@ -13,4 +13,5 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long>{
 	public Challenge findByChallengeId(int challengeid);
 	public List<Challenge> findByChallengerOrPlayerOrderByChallengeIdDesc(
 			User user, User user2);
+	public List<Challenge> findByChallengerOrPlayerOrderByDateDesc(User user, User user2);
 }
